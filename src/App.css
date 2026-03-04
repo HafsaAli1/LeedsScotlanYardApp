@@ -71,3 +71,12 @@ body {
   width: 200px;
   text-align: center;
 }
+.divImg {
+  width: 700px;
+  height: 500px;
+  background-image: url('/assetBlocks/div.png');
+  background-size: 700px 500px;
+  align-items: center;
+  text-align: center;
+  justify-content: center;
+}
