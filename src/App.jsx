@@ -1,45 +1,58 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+// src/App.jsx
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import Home from "./pages/Home";
+import CreateGame from "./pages/CreateGame";
+import JoinGame from "./pages/JoinGame";
+import Lobby from "./pages/Lobby";
 
 function App() {
   return (
-    <div>
-      <h1>Leeds Scotland Yard Game</h1>
-      <p>React MVP is running</p>
-    </div>
-  )
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/create" element={<CreateGame />} />
+        <Route path="/join" element={<JoinGame />} />
+        <Route path="/lobby" element={<Lobby />} />
+        {/* Later you can add /game for your main game screen */}
+      </Routes>
+    </BrowserRouter>
+  );
 }
 
-export default App
-// function App() {
-//   const [count, setCount] = useState(0)
+export default App;
 
+
+
+
+// import React from "react";
+// import { BrowserRouter, Routes, Route } from "react-router-dom";
+
+// import Home from "./pages/Home";
+// import CreateGame from "./pages/CreateGame";
+// import JoinGame from "./pages/JoinGame";
+// import Lobby from "./pages/Lobby";
+
+// // Placeholder for Game screen
+// function Game() {
 //   return (
-//     <>
-//       <div>
-//         <a href="https://vite.dev" target="_blank">
-//           <img src={viteLogo} className="logo" alt="Vite logo" />
-//         </a>
-//         <a href="https://react.dev" target="_blank">
-//           <img src={reactLogo} className="logo react" alt="React logo" />
-//         </a>
-//       </div>
-//       <h1>Vite + React</h1>
-//       <div className="card">
-//         <button onClick={() => setCount((count) => count + 1)}>
-//           count is {count}
-//         </button>
-//         <p>
-//           Edit <code>src/App.jsx</code> and save to test HMR
-//         </p>
-//       </div>
-//       <p className="read-the-docs">
-//         Click on the Vite and React logos to learn more
-//       </p>
-//     </>
-//   )
+//     <h2 style={{ textAlign: "center", marginTop: "50px" }}>
+//       Game Screen (to be implemented)
+//     </h2>
+//   );
 // }
 
-// export default App
+// function App() {
+//   return (
+//     <BrowserRouter>
+//       <Routes>
+//         <Route path="/" element={<Home />} />
+//         <Route path="/create" element={<CreateGame />} />
+//         <Route path="/join" element={<JoinGame />} />
+//         <Route path="/lobby" element={<Lobby />} />
+//         <Route path="/game" element={<Game />} />
+//       </Routes>
+//     </BrowserRouter>
+//   );
+// }
+
+// export default App;
