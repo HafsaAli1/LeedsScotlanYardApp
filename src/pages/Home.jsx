@@ -6,17 +6,19 @@ function Home() {
 
   return (
     <div className="container">
-      <h1 className="title">Scotland Yard Leeds</h1>
-      <p className="subtitle">
-        Hunt down Dr X and recover your assessment feedback.
-      </p>
-      <div className="button-container">
-        <button className="nav-btn" onClick={() => navigate("/create")}>
-          Create Game
-        </button>
-        <button className="nav-btn" onClick={() => navigate("/join")}>
-          Join Game
-        </button>
+      <div className="divImg">
+        <h1 className="title">Scotland Yard Leeds</h1>
+        <p className="subtitle">
+          Hunt down Dr X and recover your assessment feedback.
+        </p>
+        <div className="button-container">
+          <button className="nav-btn" onClick={() => navigate("/create")}>
+            Create Game
+          </button>
+          <button className="nav-btn" onClick={() => navigate("/join")}>
+            Join Game
+          </button>
+        </div>
       </div>
     </div>
   );
