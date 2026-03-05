@@ -1,6 +1,6 @@
 --      Team 1: Map Ids in the range 101
 
-INSERT INTO `maps` (`Id`, `Name`, `Image`, `Thumb`, `Width`, `Height`) VALUES ('101', 'Team 1 LeedsMap2', 'Team1map2.png', 'Team1map2small.png', '748', '747');
+INSERT INTO `maps` (`Id`, `Name`, `Image`, `Thumb`, `Width`, `Height`) VALUES ('101', 'Team 1 LeedsMap2', 'Team1map2.png', 'Team1map2Thumb.png', '748', '747');
 
 -- 2. The locations on the map. MapId MUST match the Id above.
 
