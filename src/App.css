@@ -1,9 +1,17 @@
 /* Basic styles for Home page */
 body {
   margin: 0;
-  font-family: Arial, sans-serif;
-  background-color: #1e1e2f;
+  background-image: url('/background.png');
+  /*filter: hue-rotate(120deg);*/
+}
+@font-face {
+  font-family: Graffiti_City;
+  src: url("/Graffiti_City.otf") format("opentype");
+}
+* {
+  font-family: Graffiti_City;
   color: white;
+  text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;
 }
 
 .container {
@@ -22,7 +30,6 @@ body {
 
 .subtitle {
   font-size: 1.2rem;
-  color: #ccc;
   margin-bottom: 40px;
 }
 
@@ -73,10 +80,25 @@ body {
 }
 .divImg {
   width: 700px;
-  height: 500px;
+  height: 300px;
   background-image: url('/assetBlocks/div.png');
-  background-size: 700px 500px;
+  background-size: 700px 300px;
   align-items: center;
   text-align: center;
   justify-content: center;
+  display: flex;
+  flex-direction: column;
+}
+.play-btn img {
+  width: 200px; /* adjust as needed */
+  height: auto;
+  display: block;
+}
+.play-btn {
+  background: none;
+  border: none;
+  padding: 15px 30px;
+  font-size: 16px;
+  border-radius: 8px;
+  cursor: pointer;
 }
