@@ -1,9 +1,12 @@
 import React, { useState, useEffect } from "react";
-import { getOpenGames, createGame, joinGame } from "./APIHelper";
+import { getOpenGames, createGame, joinGame, startGame } from "./APIHelper";
+
+const min_players = 3
 
 export default function Lobby({ setGame, setPlayer }) {
     const [games, setGames] = useState([]);
     const [name, setName] = useState("");
+    const [game,setLocalGame] = useState(null)
 
     useEffect(() => {
         getOpenGames().then(setGames);
@@ -22,6 +25,16 @@ export default function Lobby({ setGame, setPlayer }) {
         
         setGame({ id });
         setPlayer(player);
+    }
+
+    async function handleStart() {
+        if(player_tickets.length < min_players) {
+            alert("At least 3 players needed to start")
+            return
+        }
+        await startGame(game.id,players[0].id)
+
+    setGame(game)
     }
 
     return (
