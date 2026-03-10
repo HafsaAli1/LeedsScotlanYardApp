@@ -1,61 +1,115 @@
 const API = "http://trinity-developments.co.uk/api";
 
-// Creating API endpoint to list available maps as a coded function
 export async function getMaps() {
+    
     const res = await fetch(`${API}/maps`);
+
+    if (!res.ok) {
+        throw new Error("Failed to get maps");
+    }
+
     return await res.json();
 }
 
-// Creating API endpoint to identify desired map as a coded function
-export async function getMap(mapid) {
+export async function getMap(mapId) {
+    
     const res = await fetch(`${API}/maps/${mapId}`);
+
+    if (!res.ok) {
+        throw new Error("Failed to get map");
+    }
+
     return await res.json();
 }
 
-// Creating API endpoint to list available games as a coded function
 export async function getOpenGames() {
+    
     const res = await fetch(`${API}/games`);
+
+    if (!res.ok) {
+        throw new Error("Failed to get games");
+    }
+
     return await res.json();
 }
 
-// Creating API endpoint to create new game as a coded function
 export async function createGame(mapId) {
+    
     const res = await fetch(`${API}/games`, {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ mapId })
-});
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+            mapId: mapId
+        })
+    });
+
+    if (!res.ok) {
+        throw new Error("Failed to create game");
+    }
+
     return await res.json();
 }
 
-// Creating API endpoint to join game as a coded function
 export async function joinGame(gameId, name) {
+
     const res = await fetch(`${API}/games/${gameId}/players`, {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ name })
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+            name: name
+        })
     });
-}
 
-// Creating API endpoint to start game as a coded function
-export async function startGame(gameId, playerId) {
-    await fetch(`${API}/games/${gameId}/start/${playerId}`, {
-        method: "PATCH"
-    });
-}
+    if (!res.ok) {
+        throw new Error("Failed to join game");
+    }
 
-// Creating API endpoint to get desired game as a coded function
-export async function getGame(gameId) {
-    const res = await fetch(`${API}/games/${gameId}`);
     return await res.json();
 }
 
-// Creating API endpoint to move player as a coded function
+export async function startGame(gameId, playerId) {
+
+    const res = await fetch(`${API}/games/${gameId}/start/${playerId}`, {
+        method: "PATCH"
+    });
+
+    if (!res.ok) {
+        throw new Error("Failed to start game");
+    }
+
+    return true;
+}
+
+export async function getGame(gameId) {
+
+    const res = await fetch(`${API}/games/${gameId}`);
+
+    if (!res.ok) {
+        throw new Error("Failed to fetch game");
+    }
+
+    return await res.json();
+}
+
 export async function movePlayer(playerId, location) {
+
     const res = await fetch(`${API}/players/${playerId}/moves`, {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ location })
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+            location: location
+        })
     });
-    return await res.json()
+
+    if (!res.ok) {
+        throw new Error("Move failed");
+    }
+
+    return await res.json();
 }

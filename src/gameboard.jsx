@@ -1,7 +1,7 @@
 import React, {useEffect,useState} from "react"
 import {getMap,getGame,movePlayer} from "./APIHelper"
 import { getValidMoves,nextTurn} from "./gamelogic"
-import {isRevealRound} from "./gamerules"
+import {isRevealRound} from "./gamejs"
 import MoveMenu from "./gamemenu"
 
 export default function GameBoard({game,player}) {
