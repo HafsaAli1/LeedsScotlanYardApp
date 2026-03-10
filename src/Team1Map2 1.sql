@@ -1,0 +1,535 @@
+--      Team 1: Map Ids in the range 101
+
+INSERT INTO `maps` (`Id`, `Name`, `Image`, `Thumb`, `Width`, `Height`) VALUES ('102', 'Team 1 LeedsMap2', 'Team1map2.png', 'Team1map2Thumb.png', '748', '747');
+
+-- 2. The locations on the map. MapId MUST match the Id above.
+
+INSERT INTO `locations` (`MapId`, `Number`, `xPos`, `yPos`) VALUES ('102', '1', '283', '391');
+INSERT INTO `locations` (`MapId`, `Number`, `xPos`, `yPos`) VALUES ('102', '2', '337', '553');
+INSERT INTO `locations` (`MapId`, `Number`, `xPos`, `yPos`) VALUES ('102', '3', '335', '627');
+INSERT INTO `locations` (`MapId`, `Number`, `xPos`, `yPos`) VALUES ('102', '4', '213', '602');
+INSERT INTO `locations` (`MapId`, `Number`, `xPos`, `yPos`) VALUES ('102', '5', '158', '632');
+INSERT INTO `locations` (`MapId`, `Number`, `xPos`, `yPos`) VALUES ('102', '6', '86', '600');
+INSERT INTO `locations` (`MapId`, `Number`, `xPos`, `yPos`) VALUES ('102', '7', '158', '490');
+INSERT INTO `locations` (`MapId`, `Number`, `xPos`, `yPos`) VALUES ('102', '8', '167', '340');
+INSERT INTO `locations` (`MapId`, `Number`, `xPos`, `yPos`) VALUES ('102', '9', '158', '391');
+INSERT INTO `locations` (`MapId`, `Number`, `xPos`, `yPos`) VALUES ('102', '10', '68', '421');
+INSERT INTO `locations` (`MapId`, `Number`, `xPos`, `yPos`) VALUES ('102', '11', '408', '392');
+INSERT INTO `locations` (`MapId`, `Number`, `xPos`, `yPos`) VALUES ('102', '12', '553', '546');
+INSERT INTO `locations` (`MapId`, `Number`, `xPos`, `yPos`) VALUES ('102', '13', '464', '448');
+INSERT INTO `locations` (`MapId`, `Number`, `xPos`, `yPos`) VALUES ('102', '14', '480', '669');
+INSERT INTO `locations` (`MapId`, `Number`, `xPos`, `yPos`) VALUES ('102', '15', '223', '547');
+INSERT INTO `locations` (`MapId`, `Number`, `xPos`, `yPos`) VALUES ('102', '16', '105', '523');
+INSERT INTO `locations` (`MapId`, `Number`, `xPos`, `yPos`) VALUES ('102', '17', '619', '683');
+INSERT INTO `locations` (`MapId`, `Number`, `xPos`, `yPos`) VALUES ('102', '18', '604', '496');
+INSERT INTO `locations` (`MapId`, `Number`, `xPos`, `yPos`) VALUES ('102', '19', '568', '310');
+INSERT INTO `locations` (`MapId`, `Number`, `xPos`, `yPos`) VALUES ('102', '20', '407', '350');
+INSERT INTO `locations` (`MapId`, `Number`, `xPos`, `yPos`) VALUES ('102', '21', '66', '339');
+INSERT INTO `locations` (`MapId`, `Number`, `xPos`, `yPos`) VALUES ('102', '22', '177', '288');
+INSERT INTO `locations` (`MapId`, `Number`, `xPos`, `yPos`) VALUES ('102', '23', '302', '286');
+INSERT INTO `locations` (`MapId`, `Number`, `xPos`, `yPos`) VALUES ('102', '24', '393', '279');
+INSERT INTO `locations` (`MapId`, `Number`, `xPos`, `yPos`) VALUES ('102', '25', '657', '179');
+INSERT INTO `locations` (`MapId`, `Number`, `xPos`, `yPos`) VALUES ('102', '26', '551', '180');
+INSERT INTO `locations` (`MapId`, `Number`, `xPos`, `yPos`) VALUES ('102', '27', '481', '144');
+INSERT INTO `locations` (`MapId`, `Number`, `xPos`, `yPos`) VALUES ('102', '28', '674', '106');
+INSERT INTO `locations` (`MapId`, `Number`, `xPos`, `yPos`) VALUES ('102', '29', '567', '89');
+INSERT INTO `locations` (`MapId`, `Number`, `xPos`, `yPos`) VALUES ('102', '30', '372', '210');
+INSERT INTO `locations` (`MapId`, `Number`, `xPos`, `yPos`) VALUES ('102', '31', '322', '80');
+INSERT INTO `locations` (`MapId`, `Number`, `xPos`, `yPos`) VALUES ('102', '32', '213', '109');
+INSERT INTO `locations` (`MapId`, `Number`, `xPos`, `yPos`) VALUES ('102', '33', '180', '177');
+INSERT INTO `locations` (`MapId`, `Number`, `xPos`, `yPos`) VALUES ('102', '34', '70', '178');
+INSERT INTO `locations` (`MapId`, `Number`, `xPos`, `yPos`) VALUES ('102', '35', '51', '119');
+INSERT INTO `locations` (`MapId`, `Number`, `xPos`, `yPos`) VALUES ('102', '36', '606', '452');
+INSERT INTO `locations` (`MapId`, `Number`, `xPos`, `yPos`) VALUES ('102', '37', '712', '445');
+INSERT INTO `locations` (`MapId`, `Number`, `xPos`, `yPos`) VALUES ('102', '38', '277', '699');
+
+
+-- 3. The connections between locations on the map.
+--    NOTE: For Ticket type: 0 = Yellow; 1 = Purple; 2 = Red; 3 = Black.
+
+
+INSERT INTO `connections` (`MapId`, `A`, `B`, `Ticket`) VALUES ('102', '1', '8', '0');
+INSERT INTO `connections` (`MapId`, `A`, `B`, `Ticket`) VALUES ('102', '1', '21', '0');
+INSERT INTO `connections` (`MapId`, `A`, `B`, `Ticket`) VALUES ('102', '1', '22', '0');
+INSERT INTO `connections` (`MapId`, `A`, `B`, `Ticket`) VALUES ('102', '1', '23', '0');
+INSERT INTO `connections` (`MapId`, `A`, `B`, `Ticket`) VALUES ('102', '1', '34', '0');
+INSERT INTO `connections` (`MapId`, `A`, `B`, `Ticket`) VALUES ('102', '1', '35', '0');
+INSERT INTO `connections` (`MapId`, `A`, `B`, `Ticket`) VALUES ('102', '1', '24', '0');
+INSERT INTO `connections` (`MapId`, `A`, `B`, `Ticket`) VALUES ('102', '1', '26', '0');
+INSERT INTO `connections` (`MapId`, `A`, `B`, `Ticket`) VALUES ('102', '1', '29', '0');
+INSERT INTO `connections` (`MapId`, `A`, `B`, `Ticket`) VALUES ('102', '1', '28', '0');
+INSERT INTO `connections` (`MapId`, `A`, `B`, `Ticket`) VALUES ('102', '1', '19', '0');
+INSERT INTO `connections` (`MapId`, `A`, `B`, `Ticket`) VALUES ('102', '1', '20', '0');
+INSERT INTO `connections` (`MapId`, `A`, `B`, `Ticket`) VALUES ('102', '1', '37', '0');
+INSERT INTO `connections` (`MapId`, `A`, `B`, `Ticket`) VALUES ('102', '1', '36', '0');
+INSERT INTO `connections` (`MapId`, `A`, `B`, `Ticket`) VALUES ('102', '1', '7', '0');
+INSERT INTO `connections` (`MapId`, `A`, `B`, `Ticket`) VALUES ('102', '1', '15', '0');
+INSERT INTO `connections` (`MapId`, `A`, `B`, `Ticket`) VALUES ('102', '1', '2', '0');
+INSERT INTO `connections` (`MapId`, `A`, `B`, `Ticket`) VALUES ('102', '1', '14', '0');
+INSERT INTO `connections` (`MapId`, `A`, `B`, `Ticket`) VALUES ('102', '1', '11', '1');
+INSERT INTO `connections` (`MapId`, `A`, `B`, `Ticket`) VALUES ('102', '1', '13', '1');
+INSERT INTO `connections` (`MapId`, `A`, `B`, `Ticket`) VALUES ('102', '1', '2', '1');
+INSERT INTO `connections` (`MapId`, `A`, `B`, `Ticket`) VALUES ('102', '1', '9', '1');
+INSERT INTO `connections` (`MapId`, `A`, `B`, `Ticket`) VALUES ('102', '1', '6', '1');
+INSERT INTO `connections` (`MapId`, `A`, `B`, `Ticket`) VALUES ('102', '1', '16', '1');
+INSERT INTO `connections` (`MapId`, `A`, `B`, `Ticket`) VALUES ('102', '1', '23', '1');
+INSERT INTO `connections` (`MapId`, `A`, `B`, `Ticket`) VALUES ('102', '1', '12', '1');
+INSERT INTO `connections` (`MapId`, `A`, `B`, `Ticket`) VALUES ('102', '1', '36', '1');
+INSERT INTO `connections` (`MapId`, `A`, `B`, `Ticket`) VALUES ('102', '1', '33', '1');
+INSERT INTO `connections` (`MapId`, `A`, `B`, `Ticket`) VALUES ('102', '1', '34', '1');
+INSERT INTO `connections` (`MapId`, `A`, `B`, `Ticket`) VALUES ('102', '1', '31', '1');
+INSERT INTO `connections` (`MapId`, `A`, `B`, `Ticket`) VALUES ('102', '1', '29', '1');
+INSERT INTO `connections` (`MapId`, `A`, `B`, `Ticket`) VALUES ('102', '1', '27', '1');
+INSERT INTO `connections` (`MapId`, `A`, `B`, `Ticket`) VALUES ('102', '1', '30', '1');
+INSERT INTO `connections` (`MapId`, `A`, `B`, `Ticket`) VALUES ('102', '1', '25', '1');
+INSERT INTO `connections` (`MapId`, `A`, `B`, `Ticket`) VALUES ('102', '1', '38', '1');
+INSERT INTO `connections` (`MapId`, `A`, `B`, `Ticket`) VALUES ('102', '1', '4', '1');
+INSERT INTO `connections` (`MapId`, `A`, `B`, `Ticket`) VALUES ('102', '1', '5', '1');
+
+INSERT INTO `connections` (`MapId`, `A`, `B`, `Ticket`) VALUES ('102', '2', '15', '0');
+INSERT INTO `connections` (`MapId`, `A`, `B`, `Ticket`) VALUES ('102', '2', '14', '0');
+INSERT INTO `connections` (`MapId`, `A`, `B`, `Ticket`) VALUES ('102', '2', '4', '0');
+INSERT INTO `connections` (`MapId`, `A`, `B`, `Ticket`) VALUES ('102', '2', '7', '0');
+INSERT INTO `connections` (`MapId`, `A`, `B`, `Ticket`) VALUES ('102', '2', '10', '0');
+INSERT INTO `connections` (`MapId`, `A`, `B`, `Ticket`) VALUES ('102', '2', '1', '0');
+INSERT INTO `connections` (`MapId`, `A`, `B`, `Ticket`) VALUES ('102', '2', '38', '1');
+INSERT INTO `connections` (`MapId`, `A`, `B`, `Ticket`) VALUES ('102', '2', '4', '1');
+INSERT INTO `connections` (`MapId`, `A`, `B`, `Ticket`) VALUES ('102', '2', '5', '1');
+INSERT INTO `connections` (`MapId`, `A`, `B`, `Ticket`) VALUES ('102', '2', '11', '1');
+INSERT INTO `connections` (`MapId`, `A`, `B`, `Ticket`) VALUES ('102', '2', '13', '1');
+INSERT INTO `connections` (`MapId`, `A`, `B`, `Ticket`) VALUES ('102', '2', '12', '1');
+INSERT INTO `connections` (`MapId`, `A`, `B`, `Ticket`) VALUES ('102', '2', '36', '1');
+INSERT INTO `connections` (`MapId`, `A`, `B`, `Ticket`) VALUES ('102', '2', '25', '1');
+INSERT INTO `connections` (`MapId`, `A`, `B`, `Ticket`) VALUES ('102', '2', '29', '1');
+INSERT INTO `connections` (`MapId`, `A`, `B`, `Ticket`) VALUES ('102', '2', '27', '1');
+INSERT INTO `connections` (`MapId`, `A`, `B`, `Ticket`) VALUES ('102', '2', '30', '1');
+INSERT INTO `connections` (`MapId`, `A`, `B`, `Ticket`) VALUES ('102', '2', '31', '1');
+INSERT INTO `connections` (`MapId`, `A`, `B`, `Ticket`) VALUES ('102', '2', '32', '1');
+INSERT INTO `connections` (`MapId`, `A`, `B`, `Ticket`) VALUES ('102', '2', '33', '1');
+INSERT INTO `connections` (`MapId`, `A`, `B`, `Ticket`) VALUES ('102', '2', '34', '1');
+INSERT INTO `connections` (`MapId`, `A`, `B`, `Ticket`) VALUES ('102', '2', '23', '1');
+INSERT INTO `connections` (`MapId`, `A`, `B`, `Ticket`) VALUES ('102', '2', '9', '1');
+INSERT INTO `connections` (`MapId`, `A`, `B`, `Ticket`) VALUES ('102', '2', '4', '2');
+INSERT INTO `connections` (`MapId`, `A`, `B`, `Ticket`) VALUES ('102', '2', '5', '2');
+
+INSERT INTO `connections` (`MapId`, `A`, `B`, `Ticket`) VALUES ('102', '3', '14', '2');
+
+INSERT INTO `connections` (`MapId`, `A`, `B`, `Ticket`) VALUES ('102', '4', '15', '0');
+INSERT INTO `connections` (`MapId`, `A`, `B`, `Ticket`) VALUES ('102', '4', '14', '0');
+INSERT INTO `connections` (`MapId`, `A`, `B`, `Ticket`) VALUES ('102', '4', '7', '0');
+INSERT INTO `connections` (`MapId`, `A`, `B`, `Ticket`) VALUES ('102', '4', '10', '0');
+INSERT INTO `connections` (`MapId`, `A`, `B`, `Ticket`) VALUES ('102', '4', '8', '0');
+INSERT INTO `connections` (`MapId`, `A`, `B`, `Ticket`) VALUES ('102', '4', '21', '0');
+INSERT INTO `connections` (`MapId`, `A`, `B`, `Ticket`) VALUES ('102', '4', '23', '0');
+INSERT INTO `connections` (`MapId`, `A`, `B`, `Ticket`) VALUES ('102', '4', '34', '0');
+INSERT INTO `connections` (`MapId`, `A`, `B`, `Ticket`) VALUES ('102', '4', '35', '0');
+INSERT INTO `connections` (`MapId`, `A`, `B`, `Ticket`) VALUES ('102', '4', '24', '0');
+INSERT INTO `connections` (`MapId`, `A`, `B`, `Ticket`) VALUES ('102', '4', '26', '0');
+INSERT INTO `connections` (`MapId`, `A`, `B`, `Ticket`) VALUES ('102', '4', '28', '0');
+INSERT INTO `connections` (`MapId`, `A`, `B`, `Ticket`) VALUES ('102', '4', '29', '0');
+INSERT INTO `connections` (`MapId`, `A`, `B`, `Ticket`) VALUES ('102', '4', '30', '0');
+INSERT INTO `connections` (`MapId`, `A`, `B`, `Ticket`) VALUES ('102', '4', '19', '0');
+INSERT INTO `connections` (`MapId`, `A`, `B`, `Ticket`) VALUES ('102', '4', '37', '0');
+INSERT INTO `connections` (`MapId`, `A`, `B`, `Ticket`) VALUES ('102', '4', '36', '0');
+INSERT INTO `connections` (`MapId`, `A`, `B`, `Ticket`) VALUES ('102', '4', '20', '0');
+INSERT INTO `connections` (`MapId`, `A`, `B`, `Ticket`) VALUES ('102', '4', '5', '1');
+INSERT INTO `connections` (`MapId`, `A`, `B`, `Ticket`) VALUES ('102', '4', '38', '1');
+INSERT INTO `connections` (`MapId`, `A`, `B`, `Ticket`) VALUES ('102', '4', '11', '1');
+INSERT INTO `connections` (`MapId`, `A`, `B`, `Ticket`) VALUES ('102', '4', '12', '1');
+INSERT INTO `connections` (`MapId`, `A`, `B`, `Ticket`) VALUES ('102', '4', '13', '1');
+INSERT INTO `connections` (`MapId`, `A`, `B`, `Ticket`) VALUES ('102', '4', '36', '1');
+INSERT INTO `connections` (`MapId`, `A`, `B`, `Ticket`) VALUES ('102', '4', '9', '1');
+INSERT INTO `connections` (`MapId`, `A`, `B`, `Ticket`) VALUES ('102', '4', '21', '1');
+INSERT INTO `connections` (`MapId`, `A`, `B`, `Ticket`) VALUES ('102', '4', '10', '1');
+INSERT INTO `connections` (`MapId`, `A`, `B`, `Ticket`) VALUES ('102', '4', '25', '1');
+INSERT INTO `connections` (`MapId`, `A`, `B`, `Ticket`) VALUES ('102', '4', '27', '1');
+INSERT INTO `connections` (`MapId`, `A`, `B`, `Ticket`) VALUES ('102', '4', '29', '1');
+INSERT INTO `connections` (`MapId`, `A`, `B`, `Ticket`) VALUES ('102', '4', '30', '1');
+INSERT INTO `connections` (`MapId`, `A`, `B`, `Ticket`) VALUES ('102', '4', '31', '1');
+INSERT INTO `connections` (`MapId`, `A`, `B`, `Ticket`) VALUES ('102', '4', '32', '1');
+INSERT INTO `connections` (`MapId`, `A`, `B`, `Ticket`) VALUES ('102', '4', '33', '1');
+INSERT INTO `connections` (`MapId`, `A`, `B`, `Ticket`) VALUES ('102', '4', '34', '1');
+INSERT INTO `connections` (`MapId`, `A`, `B`, `Ticket`) VALUES ('102', '4', '35', '1');
+INSERT INTO `connections` (`MapId`, `A`, `B`, `Ticket`) VALUES ('102', '4', '23', '1');
+INSERT INTO `connections` (`MapId`, `A`, `B`, `Ticket`) VALUES ('102', '4', '5', '2');
+
+INSERT INTO `connections` (`MapId`, `A`, `B`, `Ticket`) VALUES ('102', '5', '6', '0');
+INSERT INTO `connections` (`MapId`, `A`, `B`, `Ticket`) VALUES ('102', '5', '38', '1');
+INSERT INTO `connections` (`MapId`, `A`, `B`, `Ticket`) VALUES ('102', '5', '9', '1');
+INSERT INTO `connections` (`MapId`, `A`, `B`, `Ticket`) VALUES ('102', '5', '23', '1');
+INSERT INTO `connections` (`MapId`, `A`, `B`, `Ticket`) VALUES ('102', '5', '33', '1');
+INSERT INTO `connections` (`MapId`, `A`, `B`, `Ticket`) VALUES ('102', '5', '32', '1');
+INSERT INTO `connections` (`MapId`, `A`, `B`, `Ticket`) VALUES ('102', '5', '31', '1');
+INSERT INTO `connections` (`MapId`, `A`, `B`, `Ticket`) VALUES ('102', '5', '34', '1');
+INSERT INTO `connections` (`MapId`, `A`, `B`, `Ticket`) VALUES ('102', '5', '29', '1');
+INSERT INTO `connections` (`MapId`, `A`, `B`, `Ticket`) VALUES ('102', '5', '27', '1');
+INSERT INTO `connections` (`MapId`, `A`, `B`, `Ticket`) VALUES ('102', '5', '25', '1');
+INSERT INTO `connections` (`MapId`, `A`, `B`, `Ticket`) VALUES ('102', '5', '11', '1');
+INSERT INTO `connections` (`MapId`, `A`, `B`, `Ticket`) VALUES ('102', '5', '12', '1');
+INSERT INTO `connections` (`MapId`, `A`, `B`, `Ticket`) VALUES ('102', '5', '13', '1');
+INSERT INTO `connections` (`MapId`, `A`, `B`, `Ticket`) VALUES ('102', '5', '36', '1');
+
+INSERT INTO `connections` (`MapId`, `A`, `B`, `Ticket`) VALUES ('102', '6', '16', '1');
+INSERT INTO `connections` (`MapId`, `A`, `B`, `Ticket`) VALUES ('102', '6', '9', '1');
+INSERT INTO `connections` (`MapId`, `A`, `B`, `Ticket`) VALUES ('102', '6', '11', '1');
+INSERT INTO `connections` (`MapId`, `A`, `B`, `Ticket`) VALUES ('102', '6', '12', '1');
+INSERT INTO `connections` (`MapId`, `A`, `B`, `Ticket`) VALUES ('102', '6', '13', '1');
+INSERT INTO `connections` (`MapId`, `A`, `B`, `Ticket`) VALUES ('102', '6', '36', '1');
+INSERT INTO `connections` (`MapId`, `A`, `B`, `Ticket`) VALUES ('102', '6', '23', '1');
+INSERT INTO `connections` (`MapId`, `A`, `B`, `Ticket`) VALUES ('102', '6', '25', '1');
+INSERT INTO `connections` (`MapId`, `A`, `B`, `Ticket`) VALUES ('102', '6', '26', '1');
+INSERT INTO `connections` (`MapId`, `A`, `B`, `Ticket`) VALUES ('102', '6', '27', '1');
+INSERT INTO `connections` (`MapId`, `A`, `B`, `Ticket`) VALUES ('102', '6', '29', '1');
+INSERT INTO `connections` (`MapId`, `A`, `B`, `Ticket`) VALUES ('102', '6', '30', '1');
+INSERT INTO `connections` (`MapId`, `A`, `B`, `Ticket`) VALUES ('102', '6', '31', '1');
+INSERT INTO `connections` (`MapId`, `A`, `B`, `Ticket`) VALUES ('102', '6', '32', '1');
+INSERT INTO `connections` (`MapId`, `A`, `B`, `Ticket`) VALUES ('102', '6', '33', '1');
+INSERT INTO `connections` (`MapId`, `A`, `B`, `Ticket`) VALUES ('102', '6', '34', '1');
+
+INSERT INTO `connections` (`MapId`, `A`, `B`, `Ticket`) VALUES ('102', '7', '15', '0');
+INSERT INTO `connections` (`MapId`, `A`, `B`, `Ticket`) VALUES ('102', '7', '14', '0');
+INSERT INTO `connections` (`MapId`, `A`, `B`, `Ticket`) VALUES ('102', '7', '10', '0');
+INSERT INTO `connections` (`MapId`, `A`, `B`, `Ticket`) VALUES ('102', '7', '8', '0');
+INSERT INTO `connections` (`MapId`, `A`, `B`, `Ticket`) VALUES ('102', '7', '21', '0');
+INSERT INTO `connections` (`MapId`, `A`, `B`, `Ticket`) VALUES ('102', '7', '22', '0');
+INSERT INTO `connections` (`MapId`, `A`, `B`, `Ticket`) VALUES ('102', '7', '23', '0');
+INSERT INTO `connections` (`MapId`, `A`, `B`, `Ticket`) VALUES ('102', '7', '24', '0');
+INSERT INTO `connections` (`MapId`, `A`, `B`, `Ticket`) VALUES ('102', '7', '34', '0');
+INSERT INTO `connections` (`MapId`, `A`, `B`, `Ticket`) VALUES ('102', '7', '35', '0');
+INSERT INTO `connections` (`MapId`, `A`, `B`, `Ticket`) VALUES ('102', '7', '26', '0');
+INSERT INTO `connections` (`MapId`, `A`, `B`, `Ticket`) VALUES ('102', '7', '29', '0');
+INSERT INTO `connections` (`MapId`, `A`, `B`, `Ticket`) VALUES ('102', '7', '30', '0');
+INSERT INTO `connections` (`MapId`, `A`, `B`, `Ticket`) VALUES ('102', '7', '28', '0');
+INSERT INTO `connections` (`MapId`, `A`, `B`, `Ticket`) VALUES ('102', '7', '19', '0');
+INSERT INTO `connections` (`MapId`, `A`, `B`, `Ticket`) VALUES ('102', '7', '37', '0');
+INSERT INTO `connections` (`MapId`, `A`, `B`, `Ticket`) VALUES ('102', '7', '36', '0');
+INSERT INTO `connections` (`MapId`, `A`, `B`, `Ticket`) VALUES ('102', '7', '20', '0');
+INSERT INTO `connections` (`MapId`, `A`, `B`, `Ticket`) VALUES ('102', '7', '19', '0');
+
+INSERT INTO `connections` (`MapId`, `A`, `B`, `Ticket`) VALUES ('102', '8', '10', '0');
+INSERT INTO `connections` (`MapId`, `A`, `B`, `Ticket`) VALUES ('102', '8', '22', '0');
+INSERT INTO `connections` (`MapId`, `A`, `B`, `Ticket`) VALUES ('102', '8', '23', '0');
+INSERT INTO `connections` (`MapId`, `A`, `B`, `Ticket`) VALUES ('102', '8', '24', '0');
+INSERT INTO `connections` (`MapId`, `A`, `B`, `Ticket`) VALUES ('102', '8', '34', '0');
+INSERT INTO `connections` (`MapId`, `A`, `B`, `Ticket`) VALUES ('102', '8', '35', '0');
+INSERT INTO `connections` (`MapId`, `A`, `B`, `Ticket`) VALUES ('102', '8', '26', '0');
+INSERT INTO `connections` (`MapId`, `A`, `B`, `Ticket`) VALUES ('102', '8', '29', '0');
+INSERT INTO `connections` (`MapId`, `A`, `B`, `Ticket`) VALUES ('102', '8', '30', '0');
+INSERT INTO `connections` (`MapId`, `A`, `B`, `Ticket`) VALUES ('102', '8', '28', '0');
+INSERT INTO `connections` (`MapId`, `A`, `B`, `Ticket`) VALUES ('102', '8', '19', '0');
+INSERT INTO `connections` (`MapId`, `A`, `B`, `Ticket`) VALUES ('102', '8', '37', '0');
+INSERT INTO `connections` (`MapId`, `A`, `B`, `Ticket`) VALUES ('102', '8', '36', '0');
+INSERT INTO `connections` (`MapId`, `A`, `B`, `Ticket`) VALUES ('102', '8', '20', '0');
+INSERT INTO `connections` (`MapId`, `A`, `B`, `Ticket`) VALUES ('102', '8', '21', '2');
+
+INSERT INTO `connections` (`MapId`, `A`, `B`, `Ticket`) VALUES ('102', '9', '16', '1');
+INSERT INTO `connections` (`MapId`, `A`, `B`, `Ticket`) VALUES ('102', '9', '11', '1');
+INSERT INTO `connections` (`MapId`, `A`, `B`, `Ticket`) VALUES ('102', '9', '12', '1');
+INSERT INTO `connections` (`MapId`, `A`, `B`, `Ticket`) VALUES ('102', '9', '13', '1');
+INSERT INTO `connections` (`MapId`, `A`, `B`, `Ticket`) VALUES ('102', '9', '36', '1');
+INSERT INTO `connections` (`MapId`, `A`, `B`, `Ticket`) VALUES ('102', '9', '23', '1');
+INSERT INTO `connections` (`MapId`, `A`, `B`, `Ticket`) VALUES ('102', '9', '25', '1');
+INSERT INTO `connections` (`MapId`, `A`, `B`, `Ticket`) VALUES ('102', '9', '29', '1');
+INSERT INTO `connections` (`MapId`, `A`, `B`, `Ticket`) VALUES ('102', '9', '31', '1');
+INSERT INTO `connections` (`MapId`, `A`, `B`, `Ticket`) VALUES ('102', '9', '27', '1');
+INSERT INTO `connections` (`MapId`, `A`, `B`, `Ticket`) VALUES ('102', '9', '30', '1');
+INSERT INTO `connections` (`MapId`, `A`, `B`, `Ticket`) VALUES ('102', '9', '31', '1');
+INSERT INTO `connections` (`MapId`, `A`, `B`, `Ticket`) VALUES ('102', '9', '32', '1');
+INSERT INTO `connections` (`MapId`, `A`, `B`, `Ticket`) VALUES ('102', '9', '33', '1');
+INSERT INTO `connections` (`MapId`, `A`, `B`, `Ticket`) VALUES ('102', '9', '34', '1');
+
+INSERT INTO `connections` (`MapId`, `A`, `B`, `Ticket`) VALUES ('102', '10', '15', '0');
+INSERT INTO `connections` (`MapId`, `A`, `B`, `Ticket`) VALUES ('102', '10', '14', '0');
+INSERT INTO `connections` (`MapId`, `A`, `B`, `Ticket`) VALUES ('102', '10', '21', '0');
+INSERT INTO `connections` (`MapId`, `A`, `B`, `Ticket`) VALUES ('102', '10', '22', '0');
+INSERT INTO `connections` (`MapId`, `A`, `B`, `Ticket`) VALUES ('102', '10', '23', '0');
+INSERT INTO `connections` (`MapId`, `A`, `B`, `Ticket`) VALUES ('102', '10', '24', '0');
+INSERT INTO `connections` (`MapId`, `A`, `B`, `Ticket`) VALUES ('102', '10', '26', '0');
+INSERT INTO `connections` (`MapId`, `A`, `B`, `Ticket`) VALUES ('102', '10', '28', '0');
+INSERT INTO `connections` (`MapId`, `A`, `B`, `Ticket`) VALUES ('102', '10', '29', '0');
+INSERT INTO `connections` (`MapId`, `A`, `B`, `Ticket`) VALUES ('102', '10', '19', '0');
+INSERT INTO `connections` (`MapId`, `A`, `B`, `Ticket`) VALUES ('102', '10', '34', '0');
+INSERT INTO `connections` (`MapId`, `A`, `B`, `Ticket`) VALUES ('102', '10', '35', '0');
+INSERT INTO `connections` (`MapId`, `A`, `B`, `Ticket`) VALUES ('102', '10', '20', '0');
+INSERT INTO `connections` (`MapId`, `A`, `B`, `Ticket`) VALUES ('102', '10', '37', '0');
+INSERT INTO `connections` (`MapId`, `A`, `B`, `Ticket`) VALUES ('102', '10', '36', '0');
+INSERT INTO `connections` (`MapId`, `A`, `B`, `Ticket`) VALUES ('102', '10', '21', '1');
+
+INSERT INTO `connections` (`MapId`, `A`, `B`, `Ticket`) VALUES ('102', '11', '13', '1');
+INSERT INTO `connections` (`MapId`, `A`, `B`, `Ticket`) VALUES ('102', '11', '12', '1');
+INSERT INTO `connections` (`MapId`, `A`, `B`, `Ticket`) VALUES ('102', '11', '36', '1');
+INSERT INTO `connections` (`MapId`, `A`, `B`, `Ticket`) VALUES ('102', '11', '25', '1');
+INSERT INTO `connections` (`MapId`, `A`, `B`, `Ticket`) VALUES ('102', '11', '27', '1');
+INSERT INTO `connections` (`MapId`, `A`, `B`, `Ticket`) VALUES ('102', '11', '30', '1');
+INSERT INTO `connections` (`MapId`, `A`, `B`, `Ticket`) VALUES ('102', '11', '31', '1');
+INSERT INTO `connections` (`MapId`, `A`, `B`, `Ticket`) VALUES ('102', '11', '32', '1');
+INSERT INTO `connections` (`MapId`, `A`, `B`, `Ticket`) VALUES ('102', '11', '33', '1');
+INSERT INTO `connections` (`MapId`, `A`, `B`, `Ticket`) VALUES ('102', '11', '34', '1');
+INSERT INTO `connections` (`MapId`, `A`, `B`, `Ticket`) VALUES ('102', '11', '38', '1');
+INSERT INTO `connections` (`MapId`, `A`, `B`, `Ticket`) VALUES ('102', '11', '19', '2');
+INSERT INTO `connections` (`MapId`, `A`, `B`, `Ticket`) VALUES ('102', '11', '26', '2');
+
+INSERT INTO `connections` (`MapId`, `A`, `B`, `Ticket`) VALUES ('102', '12', '13', '1');
+INSERT INTO `connections` (`MapId`, `A`, `B`, `Ticket`) VALUES ('102', '12', '36', '1');
+INSERT INTO `connections` (`MapId`, `A`, `B`, `Ticket`) VALUES ('102', '12', '38', '1');
+INSERT INTO `connections` (`MapId`, `A`, `B`, `Ticket`) VALUES ('102', '12', '23', '1');
+INSERT INTO `connections` (`MapId`, `A`, `B`, `Ticket`) VALUES ('102', '12', '25', '1');
+INSERT INTO `connections` (`MapId`, `A`, `B`, `Ticket`) VALUES ('102', '12', '29', '1');
+INSERT INTO `connections` (`MapId`, `A`, `B`, `Ticket`) VALUES ('102', '12', '31', '1');
+INSERT INTO `connections` (`MapId`, `A`, `B`, `Ticket`) VALUES ('102', '12', '32', '1');
+INSERT INTO `connections` (`MapId`, `A`, `B`, `Ticket`) VALUES ('102', '12', '33', '1');
+INSERT INTO `connections` (`MapId`, `A`, `B`, `Ticket`) VALUES ('102', '12', '34', '1');
+INSERT INTO `connections` (`MapId`, `A`, `B`, `Ticket`) VALUES ('102', '12', '16', '1');
+INSERT INTO `connections` (`MapId`, `A`, `B`, `Ticket`) VALUES ('102', '12', '13', '2');
+INSERT INTO `connections` (`MapId`, `A`, `B`, `Ticket`) VALUES ('102', '12', '36', '2');
+
+INSERT INTO `connections` (`MapId`, `A`, `B`, `Ticket`) VALUES ('102', '13', '36', '1');
+INSERT INTO `connections` (`MapId`, `A`, `B`, `Ticket`) VALUES ('102', '13', '38', '1');
+INSERT INTO `connections` (`MapId`, `A`, `B`, `Ticket`) VALUES ('102', '13', '16', '1');
+INSERT INTO `connections` (`MapId`, `A`, `B`, `Ticket`) VALUES ('102', '13', '23', '1');
+INSERT INTO `connections` (`MapId`, `A`, `B`, `Ticket`) VALUES ('102', '13', '25', '1');
+INSERT INTO `connections` (`MapId`, `A`, `B`, `Ticket`) VALUES ('102', '13', '29', '1');
+INSERT INTO `connections` (`MapId`, `A`, `B`, `Ticket`) VALUES ('102', '13', '27', '1');
+INSERT INTO `connections` (`MapId`, `A`, `B`, `Ticket`) VALUES ('102', '13', '30', '1');
+INSERT INTO `connections` (`MapId`, `A`, `B`, `Ticket`) VALUES ('102', '13', '31', '1');
+INSERT INTO `connections` (`MapId`, `A`, `B`, `Ticket`) VALUES ('102', '13', '32', '1');
+INSERT INTO `connections` (`MapId`, `A`, `B`, `Ticket`) VALUES ('102', '13', '33', '1');
+INSERT INTO `connections` (`MapId`, `A`, `B`, `Ticket`) VALUES ('102', '13', '34', '1');
+INSERT INTO `connections` (`MapId`, `A`, `B`, `Ticket`) VALUES ('102', '13', '36', '2');
+
+INSERT INTO `connections` (`MapId`, `A`, `B`, `Ticket`) VALUES ('102', '14', '15', '0');
+INSERT INTO `connections` (`MapId`, `A`, `B`, `Ticket`) VALUES ('102', '14', '21', '0');
+INSERT INTO `connections` (`MapId`, `A`, `B`, `Ticket`) VALUES ('102', '14', '22', '0');
+INSERT INTO `connections` (`MapId`, `A`, `B`, `Ticket`) VALUES ('102', '14', '23', '0');
+INSERT INTO `connections` (`MapId`, `A`, `B`, `Ticket`) VALUES ('102', '14', '24', '0');
+INSERT INTO `connections` (`MapId`, `A`, `B`, `Ticket`) VALUES ('102', '14', '26', '0');
+INSERT INTO `connections` (`MapId`, `A`, `B`, `Ticket`) VALUES ('102', '14', '28', '0');
+INSERT INTO `connections` (`MapId`, `A`, `B`, `Ticket`) VALUES ('102', '14', '29', '0');
+INSERT INTO `connections` (`MapId`, `A`, `B`, `Ticket`) VALUES ('102', '14', '30', '0');
+INSERT INTO `connections` (`MapId`, `A`, `B`, `Ticket`) VALUES ('102', '14', '19', '0');
+INSERT INTO `connections` (`MapId`, `A`, `B`, `Ticket`) VALUES ('102', '14', '37', '0');
+INSERT INTO `connections` (`MapId`, `A`, `B`, `Ticket`) VALUES ('102', '14', '36', '0');
+
+INSERT INTO `connections` (`MapId`, `A`, `B`, `Ticket`) VALUES ('102', '15', '21', '0');
+INSERT INTO `connections` (`MapId`, `A`, `B`, `Ticket`) VALUES ('102', '15', '22', '0');
+INSERT INTO `connections` (`MapId`, `A`, `B`, `Ticket`) VALUES ('102', '15', '23', '0');
+INSERT INTO `connections` (`MapId`, `A`, `B`, `Ticket`) VALUES ('102', '15', '24', '0');
+INSERT INTO `connections` (`MapId`, `A`, `B`, `Ticket`) VALUES ('102', '15', '20', '0');
+INSERT INTO `connections` (`MapId`, `A`, `B`, `Ticket`) VALUES ('102', '15', '19', '0');
+INSERT INTO `connections` (`MapId`, `A`, `B`, `Ticket`) VALUES ('102', '15', '37', '0');
+INSERT INTO `connections` (`MapId`, `A`, `B`, `Ticket`) VALUES ('102', '15', '36', '0');
+INSERT INTO `connections` (`MapId`, `A`, `B`, `Ticket`) VALUES ('102', '15', '28', '0');
+INSERT INTO `connections` (`MapId`, `A`, `B`, `Ticket`) VALUES ('102', '15', '29', '0');
+INSERT INTO `connections` (`MapId`, `A`, `B`, `Ticket`) VALUES ('102', '15', '30', '0');
+INSERT INTO `connections` (`MapId`, `A`, `B`, `Ticket`) VALUES ('102', '15', '34', '0');
+INSERT INTO `connections` (`MapId`, `A`, `B`, `Ticket`) VALUES ('102', '15', '35', '0');
+
+INSERT INTO `connections` (`MapId`, `A`, `B`, `Ticket`) VALUES ('102', '16', '38', '1');
+INSERT INTO `connections` (`MapId`, `A`, `B`, `Ticket`) VALUES ('102', '16', '30', '1');
+INSERT INTO `connections` (`MapId`, `A`, `B`, `Ticket`) VALUES ('102', '16', '31', '1');
+INSERT INTO `connections` (`MapId`, `A`, `B`, `Ticket`) VALUES ('102', '16', '29', '1');
+INSERT INTO `connections` (`MapId`, `A`, `B`, `Ticket`) VALUES ('102', '16', '27', '1');
+INSERT INTO `connections` (`MapId`, `A`, `B`, `Ticket`) VALUES ('102', '16', '25', '1');
+INSERT INTO `connections` (`MapId`, `A`, `B`, `Ticket`) VALUES ('102', '16', '32', '1');
+INSERT INTO `connections` (`MapId`, `A`, `B`, `Ticket`) VALUES ('102', '16', '33', '1');
+INSERT INTO `connections` (`MapId`, `A`, `B`, `Ticket`) VALUES ('102', '16', '34', '1');
+INSERT INTO `connections` (`MapId`, `A`, `B`, `Ticket`) VALUES ('102', '16', '23', '1');
+INSERT INTO `connections` (`MapId`, `A`, `B`, `Ticket`) VALUES ('102', '16', '36', '1');
+INSERT INTO `connections` (`MapId`, `A`, `B`, `Ticket`) VALUES ('102', '16', '38', '1');
+
+INSERT INTO `connections` (`MapId`, `A`, `B`, `Ticket`) VALUES ('102', '17', '18', '0');
+
+INSERT INTO `connections` (`MapId`, `A`, `B`, `Ticket`) VALUES ('102', '19', '37', '0');
+INSERT INTO `connections` (`MapId`, `A`, `B`, `Ticket`) VALUES ('102', '19', '36', '0');
+INSERT INTO `connections` (`MapId`, `A`, `B`, `Ticket`) VALUES ('102', '19', '20', '0');
+INSERT INTO `connections` (`MapId`, `A`, `B`, `Ticket`) VALUES ('102', '19', '26', '0');
+INSERT INTO `connections` (`MapId`, `A`, `B`, `Ticket`) VALUES ('102', '19', '29', '0');
+INSERT INTO `connections` (`MapId`, `A`, `B`, `Ticket`) VALUES ('102', '19', '28', '0');
+INSERT INTO `connections` (`MapId`, `A`, `B`, `Ticket`) VALUES ('102', '19', '30', '0');
+INSERT INTO `connections` (`MapId`, `A`, `B`, `Ticket`) VALUES ('102', '19', '24', '0');
+INSERT INTO `connections` (`MapId`, `A`, `B`, `Ticket`) VALUES ('102', '19', '23', '0');
+INSERT INTO `connections` (`MapId`, `A`, `B`, `Ticket`) VALUES ('102', '19', '22', '0');
+INSERT INTO `connections` (`MapId`, `A`, `B`, `Ticket`) VALUES ('102', '19', '34', '0');
+INSERT INTO `connections` (`MapId`, `A`, `B`, `Ticket`) VALUES ('102', '19', '21', '0');
+INSERT INTO `connections` (`MapId`, `A`, `B`, `Ticket`) VALUES ('102', '19', '35', '0');
+
+INSERT INTO `connections` (`MapId`, `A`, `B`, `Ticket`) VALUES ('102', '20', '37', '0');
+INSERT INTO `connections` (`MapId`, `A`, `B`, `Ticket`) VALUES ('102', '20', '36', '0');
+INSERT INTO `connections` (`MapId`, `A`, `B`, `Ticket`) VALUES ('102', '20', '28', '0');
+INSERT INTO `connections` (`MapId`, `A`, `B`, `Ticket`) VALUES ('102', '20', '26', '0');
+INSERT INTO `connections` (`MapId`, `A`, `B`, `Ticket`) VALUES ('102', '20', '29', '0');
+INSERT INTO `connections` (`MapId`, `A`, `B`, `Ticket`) VALUES ('102', '20', '30', '0');
+INSERT INTO `connections` (`MapId`, `A`, `B`, `Ticket`) VALUES ('102', '20', '24', '0');
+INSERT INTO `connections` (`MapId`, `A`, `B`, `Ticket`) VALUES ('102', '20', '23', '0');
+INSERT INTO `connections` (`MapId`, `A`, `B`, `Ticket`) VALUES ('102', '20', '22', '0');
+INSERT INTO `connections` (`MapId`, `A`, `B`, `Ticket`) VALUES ('102', '20', '21', '0');
+INSERT INTO `connections` (`MapId`, `A`, `B`, `Ticket`) VALUES ('102', '20', '34', '0');
+INSERT INTO `connections` (`MapId`, `A`, `B`, `Ticket`) VALUES ('102', '20', '35', '0');
+
+INSERT INTO `connections` (`MapId`, `A`, `B`, `Ticket`) VALUES ('102', '21', '22', '0');
+INSERT INTO `connections` (`MapId`, `A`, `B`, `Ticket`) VALUES ('102', '21', '23', '0');
+INSERT INTO `connections` (`MapId`, `A`, `B`, `Ticket`) VALUES ('102', '21', '24', '0');
+INSERT INTO `connections` (`MapId`, `A`, `B`, `Ticket`) VALUES ('102', '21', '25', '0');
+INSERT INTO `connections` (`MapId`, `A`, `B`, `Ticket`) VALUES ('102', '21', '26', '0');
+INSERT INTO `connections` (`MapId`, `A`, `B`, `Ticket`) VALUES ('102', '21', '28', '0');
+INSERT INTO `connections` (`MapId`, `A`, `B`, `Ticket`) VALUES ('102', '21', '29', '0');
+INSERT INTO `connections` (`MapId`, `A`, `B`, `Ticket`) VALUES ('102', '21', '30', '0');
+INSERT INTO `connections` (`MapId`, `A`, `B`, `Ticket`) VALUES ('102', '21', '34', '0');
+INSERT INTO `connections` (`MapId`, `A`, `B`, `Ticket`) VALUES ('102', '21', '35', '0');
+INSERT INTO `connections` (`MapId`, `A`, `B`, `Ticket`) VALUES ('102', '21', '36', '0');
+INSERT INTO `connections` (`MapId`, `A`, `B`, `Ticket`) VALUES ('102', '21', '37', '0');
+
+INSERT INTO `connections` (`MapId`, `A`, `B`, `Ticket`) VALUES ('102', '22', '23', '0');
+INSERT INTO `connections` (`MapId`, `A`, `B`, `Ticket`) VALUES ('102', '22', '24', '0');
+INSERT INTO `connections` (`MapId`, `A`, `B`, `Ticket`) VALUES ('102', '22', '26', '0');
+INSERT INTO `connections` (`MapId`, `A`, `B`, `Ticket`) VALUES ('102', '22', '28', '0');
+INSERT INTO `connections` (`MapId`, `A`, `B`, `Ticket`) VALUES ('102', '22', '29', '0');
+INSERT INTO `connections` (`MapId`, `A`, `B`, `Ticket`) VALUES ('102', '22', '30', '0');
+INSERT INTO `connections` (`MapId`, `A`, `B`, `Ticket`) VALUES ('102', '22', '34', '0');
+INSERT INTO `connections` (`MapId`, `A`, `B`, `Ticket`) VALUES ('102', '22', '35', '0');
+INSERT INTO `connections` (`MapId`, `A`, `B`, `Ticket`) VALUES ('102', '22', '36', '0');
+INSERT INTO `connections` (`MapId`, `A`, `B`, `Ticket`) VALUES ('102', '22', '37', '0');
+INSERT INTO `connections` (`MapId`, `A`, `B`, `Ticket`) VALUES ('102', '22', '35', '2');
+INSERT INTO `connections` (`MapId`, `A`, `B`, `Ticket`) VALUES ('102', '22', '24', '2');
+INSERT INTO `connections` (`MapId`, `A`, `B`, `Ticket`) VALUES ('102', '22', '30', '2');
+INSERT INTO `connections` (`MapId`, `A`, `B`, `Ticket`) VALUES ('102', '22', '31', '2');
+
+INSERT INTO `connections` (`MapId`, `A`, `B`, `Ticket`) VALUES ('102', '23', '24', '0');
+INSERT INTO `connections` (`MapId`, `A`, `B`, `Ticket`) VALUES ('102', '23', '34', '0');
+INSERT INTO `connections` (`MapId`, `A`, `B`, `Ticket`) VALUES ('102', '23', '35', '0');
+INSERT INTO `connections` (`MapId`, `A`, `B`, `Ticket`) VALUES ('102', '23', '26', '0');
+INSERT INTO `connections` (`MapId`, `A`, `B`, `Ticket`) VALUES ('102', '23', '29', '0');
+INSERT INTO `connections` (`MapId`, `A`, `B`, `Ticket`) VALUES ('102', '23', '28', '0');
+INSERT INTO `connections` (`MapId`, `A`, `B`, `Ticket`) VALUES ('102', '23', '37', '0');
+INSERT INTO `connections` (`MapId`, `A`, `B`, `Ticket`) VALUES ('102', '23', '36', '0');
+INSERT INTO `connections` (`MapId`, `A`, `B`, `Ticket`) VALUES ('102', '23', '30', '0');
+INSERT INTO `connections` (`MapId`, `A`, `B`, `Ticket`) VALUES ('102', '23', '36', '1');
+INSERT INTO `connections` (`MapId`, `A`, `B`, `Ticket`) VALUES ('102', '23', '25', '1');
+INSERT INTO `connections` (`MapId`, `A`, `B`, `Ticket`) VALUES ('102', '23', '27', '1');
+INSERT INTO `connections` (`MapId`, `A`, `B`, `Ticket`) VALUES ('102', '23', '29', '1');
+INSERT INTO `connections` (`MapId`, `A`, `B`, `Ticket`) VALUES ('102', '23', '30', '1');
+INSERT INTO `connections` (`MapId`, `A`, `B`, `Ticket`) VALUES ('102', '23', '31', '1');
+INSERT INTO `connections` (`MapId`, `A`, `B`, `Ticket`) VALUES ('102', '23', '32', '1');
+INSERT INTO `connections` (`MapId`, `A`, `B`, `Ticket`) VALUES ('102', '23', '33', '1');
+INSERT INTO `connections` (`MapId`, `A`, `B`, `Ticket`) VALUES ('102', '23', '34', '1');
+INSERT INTO `connections` (`MapId`, `A`, `B`, `Ticket`) VALUES ('102', '23', '38', '1');
+
+INSERT INTO `connections` (`MapId`, `A`, `B`, `Ticket`) VALUES ('102', '24', '26', '0');
+INSERT INTO `connections` (`MapId`, `A`, `B`, `Ticket`) VALUES ('102', '24', '28', '0');
+INSERT INTO `connections` (`MapId`, `A`, `B`, `Ticket`) VALUES ('102', '24', '29', '0');
+INSERT INTO `connections` (`MapId`, `A`, `B`, `Ticket`) VALUES ('102', '24', '30', '0');
+INSERT INTO `connections` (`MapId`, `A`, `B`, `Ticket`) VALUES ('102', '24', '34', '0');
+INSERT INTO `connections` (`MapId`, `A`, `B`, `Ticket`) VALUES ('102', '24', '35', '0');
+INSERT INTO `connections` (`MapId`, `A`, `B`, `Ticket`) VALUES ('102', '24', '36', '0');
+INSERT INTO `connections` (`MapId`, `A`, `B`, `Ticket`) VALUES ('102', '24', '37', '0');
+INSERT INTO `connections` (`MapId`, `A`, `B`, `Ticket`) VALUES ('102', '24', '30', '1');
+INSERT INTO `connections` (`MapId`, `A`, `B`, `Ticket`) VALUES ('102', '24', '31', '1');
+INSERT INTO `connections` (`MapId`, `A`, `B`, `Ticket`) VALUES ('102', '24', '35', '1');
+INSERT INTO `connections` (`MapId`, `A`, `B`, `Ticket`) VALUES ('102', '24', '25', '1');
+INSERT INTO `connections` (`MapId`, `A`, `B`, `Ticket`) VALUES ('102', '24', '27', '1');
+INSERT INTO `connections` (`MapId`, `A`, `B`, `Ticket`) VALUES ('102', '24', '29', '1');
+INSERT INTO `connections` (`MapId`, `A`, `B`, `Ticket`) VALUES ('102', '24', '32', '1');
+INSERT INTO `connections` (`MapId`, `A`, `B`, `Ticket`) VALUES ('102', '24', '33', '1');
+INSERT INTO `connections` (`MapId`, `A`, `B`, `Ticket`) VALUES ('102', '24', '34', '1');
+INSERT INTO `connections` (`MapId`, `A`, `B`, `Ticket`) VALUES ('102', '24', '36', '1');
+INSERT INTO `connections` (`MapId`, `A`, `B`, `Ticket`) VALUES ('102', '24', '38', '1');
+
+INSERT INTO `connections` (`MapId`, `A`, `B`, `Ticket`) VALUES ('102', '25', '27', '1');
+INSERT INTO `connections` (`MapId`, `A`, `B`, `Ticket`) VALUES ('102', '25', '29', '1');
+INSERT INTO `connections` (`MapId`, `A`, `B`, `Ticket`) VALUES ('102', '25', '30', '1');
+INSERT INTO `connections` (`MapId`, `A`, `B`, `Ticket`) VALUES ('102', '25', '31', '1');
+INSERT INTO `connections` (`MapId`, `A`, `B`, `Ticket`) VALUES ('102', '25', '32', '1');
+INSERT INTO `connections` (`MapId`, `A`, `B`, `Ticket`) VALUES ('102', '25', '33', '1');
+INSERT INTO `connections` (`MapId`, `A`, `B`, `Ticket`) VALUES ('102', '25', '34', '1');
+INSERT INTO `connections` (`MapId`, `A`, `B`, `Ticket`) VALUES ('102', '25', '38', '1');
+INSERT INTO `connections` (`MapId`, `A`, `B`, `Ticket`) VALUES ('102', '25', '28', '2');
+
+
+INSERT INTO `connections` (`MapId`, `A`, `B`, `Ticket`) VALUES ('102', '26', '28', '0');
+INSERT INTO `connections` (`MapId`, `A`, `B`, `Ticket`) VALUES ('102', '26', '29', '0');
+INSERT INTO `connections` (`MapId`, `A`, `B`, `Ticket`) VALUES ('102', '26', '30', '0');
+INSERT INTO `connections` (`MapId`, `A`, `B`, `Ticket`) VALUES ('102', '26', '34', '0');
+INSERT INTO `connections` (`MapId`, `A`, `B`, `Ticket`) VALUES ('102', '26', '35', '0');
+INSERT INTO `connections` (`MapId`, `A`, `B`, `Ticket`) VALUES ('102', '26', '36', '0');
+INSERT INTO `connections` (`MapId`, `A`, `B`, `Ticket`) VALUES ('102', '26', '37', '0');
+
+INSERT INTO `connections` (`MapId`, `A`, `B`, `Ticket`) VALUES ('102', '27', '29', '1');
+INSERT INTO `connections` (`MapId`, `A`, `B`, `Ticket`) VALUES ('102', '27', '30', '1');
+INSERT INTO `connections` (`MapId`, `A`, `B`, `Ticket`) VALUES ('102', '27', '31', '1');
+INSERT INTO `connections` (`MapId`, `A`, `B`, `Ticket`) VALUES ('102', '27', '32', '1');
+INSERT INTO `connections` (`MapId`, `A`, `B`, `Ticket`) VALUES ('102', '27', '33', '1');
+INSERT INTO `connections` (`MapId`, `A`, `B`, `Ticket`) VALUES ('102', '27', '34', '1');
+INSERT INTO `connections` (`MapId`, `A`, `B`, `Ticket`) VALUES ('102', '27', '36', '1');
+INSERT INTO `connections` (`MapId`, `A`, `B`, `Ticket`) VALUES ('102', '27', '38', '1');
+
+INSERT INTO `connections` (`MapId`, `A`, `B`, `Ticket`) VALUES ('102', '28', '29', '0');
+INSERT INTO `connections` (`MapId`, `A`, `B`, `Ticket`) VALUES ('102', '28', '30', '0');
+INSERT INTO `connections` (`MapId`, `A`, `B`, `Ticket`) VALUES ('102', '28', '34', '0');
+INSERT INTO `connections` (`MapId`, `A`, `B`, `Ticket`) VALUES ('102', '28', '35', '0');
+INSERT INTO `connections` (`MapId`, `A`, `B`, `Ticket`) VALUES ('102', '28', '36', '0');
+INSERT INTO `connections` (`MapId`, `A`, `B`, `Ticket`) VALUES ('102', '28', '37', '0');
+
+INSERT INTO `connections` (`MapId`, `A`, `B`, `Ticket`) VALUES ('102', '29', '30', '0');
+INSERT INTO `connections` (`MapId`, `A`, `B`, `Ticket`) VALUES ('102', '29', '31', '0');
+INSERT INTO `connections` (`MapId`, `A`, `B`, `Ticket`) VALUES ('102', '29', '37', '0');
+INSERT INTO `connections` (`MapId`, `A`, `B`, `Ticket`) VALUES ('102', '29', '36', '0');
+INSERT INTO `connections` (`MapId`, `A`, `B`, `Ticket`) VALUES ('102', '29', '34', '0');
+INSERT INTO `connections` (`MapId`, `A`, `B`, `Ticket`) VALUES ('102', '29', '35', '0');
+INSERT INTO `connections` (`MapId`, `A`, `B`, `Ticket`) VALUES ('102', '29', '30', '1');
+INSERT INTO `connections` (`MapId`, `A`, `B`, `Ticket`) VALUES ('102', '29', '31', '1');
+INSERT INTO `connections` (`MapId`, `A`, `B`, `Ticket`) VALUES ('102', '29', '32', '1');
+INSERT INTO `connections` (`MapId`, `A`, `B`, `Ticket`) VALUES ('102', '29', '33', '1');
+INSERT INTO `connections` (`MapId`, `A`, `B`, `Ticket`) VALUES ('102', '29', '34', '1');
+INSERT INTO `connections` (`MapId`, `A`, `B`, `Ticket`) VALUES ('102', '29', '36', '1');
+INSERT INTO `connections` (`MapId`, `A`, `B`, `Ticket`) VALUES ('102', '29', '38', '1');
+
+INSERT INTO `connections` (`MapId`, `A`, `B`, `Ticket`) VALUES ('102', '30', '34', '0');
+INSERT INTO `connections` (`MapId`, `A`, `B`, `Ticket`) VALUES ('102', '30', '35', '0');
+INSERT INTO `connections` (`MapId`, `A`, `B`, `Ticket`) VALUES ('102', '30', '36', '0');
+INSERT INTO `connections` (`MapId`, `A`, `B`, `Ticket`) VALUES ('102', '30', '37', '0');
+INSERT INTO `connections` (`MapId`, `A`, `B`, `Ticket`) VALUES ('102', '30', '31', '1');
+INSERT INTO `connections` (`MapId`, `A`, `B`, `Ticket`) VALUES ('102', '30', '32', '1');
+INSERT INTO `connections` (`MapId`, `A`, `B`, `Ticket`) VALUES ('102', '30', '33', '1');
+INSERT INTO `connections` (`MapId`, `A`, `B`, `Ticket`) VALUES ('102', '30', '34', '1');
+INSERT INTO `connections` (`MapId`, `A`, `B`, `Ticket`) VALUES ('102', '30', '36', '1');
+INSERT INTO `connections` (`MapId`, `A`, `B`, `Ticket`) VALUES ('102', '30', '38', '1');
+INSERT INTO `connections` (`MapId`, `A`, `B`, `Ticket`) VALUES ('102', '30', '31', '2');
+INSERT INTO `connections` (`MapId`, `A`, `B`, `Ticket`) VALUES ('102', '30', '35', '2');
+
+INSERT INTO `connections` (`MapId`, `A`, `B`, `Ticket`) VALUES ('102', '31', '32', '1');
+INSERT INTO `connections` (`MapId`, `A`, `B`, `Ticket`) VALUES ('102', '31', '33', '1');
+INSERT INTO `connections` (`MapId`, `A`, `B`, `Ticket`) VALUES ('102', '31', '34', '1');
+INSERT INTO `connections` (`MapId`, `A`, `B`, `Ticket`) VALUES ('102', '31', '36', '1');
+INSERT INTO `connections` (`MapId`, `A`, `B`, `Ticket`) VALUES ('102', '31', '38', '1');
+INSERT INTO `connections` (`MapId`, `A`, `B`, `Ticket`) VALUES ('102', '31', '35', '2');
+
+INSERT INTO `connections` (`MapId`, `A`, `B`, `Ticket`) VALUES ('102', '32', '33', '1');
+INSERT INTO `connections` (`MapId`, `A`, `B`, `Ticket`) VALUES ('102', '32', '34', '1');
+INSERT INTO `connections` (`MapId`, `A`, `B`, `Ticket`) VALUES ('102', '32', '36', '1');
+
+INSERT INTO `connections` (`MapId`, `A`, `B`, `Ticket`) VALUES ('102', '33', '34', '1');
+INSERT INTO `connections` (`MapId`, `A`, `B`, `Ticket`) VALUES ('102', '33', '36', '1');
+INSERT INTO `connections` (`MapId`, `A`, `B`, `Ticket`) VALUES ('102', '33', '38', '1');
+
+INSERT INTO `connections` (`MapId`, `A`, `B`, `Ticket`) VALUES ('102', '34', '35', '0');
+INSERT INTO `connections` (`MapId`, `A`, `B`, `Ticket`) VALUES ('102', '34', '36', '0');
+INSERT INTO `connections` (`MapId`, `A`, `B`, `Ticket`) VALUES ('102', '34', '37', '0');
+INSERT INTO `connections` (`MapId`, `A`, `B`, `Ticket`) VALUES ('102', '34', '36', '0');
+INSERT INTO `connections` (`MapId`, `A`, `B`, `Ticket`) VALUES ('102', '34', '38', '0');
+
+INSERT INTO `connections` (`MapId`, `A`, `B`, `Ticket`) VALUES ('102', '35', '36', '0');
+INSERT INTO `connections` (`MapId`, `A`, `B`, `Ticket`) VALUES ('102', '35', '37', '0');
+
+INSERT INTO `connections` (`MapId`, `A`, `B`, `Ticket`) VALUES ('102', '36', '37', '0');
+INSERT INTO `connections` (`MapId`, `A`, `B`, `Ticket`) VALUES ('102', '36', '38', '1');
+
+
+
+-- 4. The starting positions
+--    NOTE: For Role type: 1 = Fugitive; 2 = Detective
+
+INSERT INTO `startlocations` (`MapId`, `Role`, `Location`) VALUES ('102', '1', '12');
+INSERT INTO `startlocations` (`MapId`, `Role`, `Location`) VALUES ('102', '2', '22');
+INSERT INTO `startlocations` (`MapId`, `Role`, `Location`) VALUES ('102', '2', '16');
+INSERT INTO `startlocations` (`MapId`, `Role`, `Location`) VALUES ('102', '2', '27');
+INSERT INTO `startlocations` (`MapId`, `Role`, `Location`) VALUES ('102', '2', '37');
