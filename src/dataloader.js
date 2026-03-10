@@ -1,3 +1,6 @@
+import fs from "fs/promises";
+import path from "path";
+
 function buildMap(locations, connections) {
 
     const nodes = {}
@@ -26,8 +29,8 @@ function buildMap(locations, connections) {
 
 export async function loadMapfromSQL() {
     
-    const res = await fetch("/Team1Map2%201.sql")
-    const text = await res.text()
+    const filepath = path.resolve("./Team1Map2 1.sql");
+    const text = await fs.readFile(filepath, "utf8");
 
     const locations = []
     const connections = []

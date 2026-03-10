@@ -1,5 +1,5 @@
-import { movePlayer, getGame } from "./APIHelper";
-import { loadMapfromSQL } from "./dataloader";
+import { movePlayer, getGame } from "./APIHelper.js";
+import { loadMapfromSQL } from "./dataloader.js";
 
 export class ScotlandYardGame {
 
