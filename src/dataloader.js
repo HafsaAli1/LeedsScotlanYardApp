@@ -1,5 +1,8 @@
 import fs from "fs/promises";
 import path from "path";
+import { fileURLToPath } from "url";
+
+const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
 function buildMap(locations, connections) {
 
@@ -14,13 +17,14 @@ function buildMap(locations, connections) {
             y: loc.yPos
         }
 
-        edges[loc.Number]
+        edges[loc.Number] = []
     })
 
     connections.forEach(conn => {
 
         edges[conn.A].push({
-            to: conn.B.Ticket
+            to: conn.B,
+            ticket: conn.Ticket
         })
     })
 
@@ -29,7 +33,7 @@ function buildMap(locations, connections) {
 
 export async function loadMapfromSQL() {
     
-    const filepath = path.resolve("./Team1Map2 1.sql");
+    const filepath = path.resolve(__dirname, "Team1Map2 1.sql");
     const text = await fs.readFile(filepath, "utf8");
 
     const locations = []

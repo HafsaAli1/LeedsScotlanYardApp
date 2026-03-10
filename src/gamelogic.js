@@ -10,6 +10,8 @@ export class ScotlandYardGame {
 
         this.state = null
         this.map = null
+        this.players = []
+        this.playerCount = 5
     }
 
     async loadMap() {
@@ -25,28 +27,29 @@ export class ScotlandYardGame {
         this.map = await loadMapfromSQL()
 
         this.randomisePlayers()
+        this.AssignMrX()
 
-        this.printPlayerInfo
+        await this.printPlayerInfo()
     }
 
-    printPlayerInfo() {
+    async printPlayerInfo() {
 
         console.log("\n--- Player Locations ---\n")
 
-        this.players.forEach(player => {
+        for (const player of this.players) {
 
-            const moves = this.getValidMoves(player.lcoation)
+            const moves = await this.getValidMovesForLocation(player.location)
 
             console.log(
                 `Player ${player.id} (${player.role}) is at location ${player.location}`
             )
 
             console.log(
-                `Possible moves: ${moves.join(", ")}`
+                `Possible moves: ${moves.map(m => m.location).join(", ")}`
             )
 
             console.log("-----------------------")
-        })
+        }
     }
 
     randomisePlayers() {
@@ -56,7 +59,7 @@ export class ScotlandYardGame {
         while (this.players.length < this.playerCount) {
 
             const randomNode =
-                nodeIds[Math.random() * nodeIds.length]
+                nodeIds[Math.floor(Math.random() * nodeIds.length)]
 
             if (usedNodes.has(randomNode)) continue
 
@@ -128,6 +131,20 @@ export class ScotlandYardGame {
 
         const location = player.location
         
+        const moves = this.map.edges[location] || []
+
+        return moves.map(
+            m => ({
+                location: m.to,
+                ticket: m.ticket
+            })
+        )
+    }
+
+    async getValidMovesForLocation(location) {
+
+        await this.loadMap()
+
         const moves = this.map.edges[location] || []
 
         return moves.map(
