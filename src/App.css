@@ -1,42 +1,181 @@
-#root {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background-color: #1e1e2f;
+  color: white;
+}
+
+.container {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
   text-align: center;
 }
 
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
-}
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
+.title {
+  font-size: 3rem;
+  margin-bottom: 10px;
 }
 
-@keyframes logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.subtitle {
+  font-size: 1.2rem;
+  color: #ccc;
+  margin-bottom: 40px;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  a:nth-of-type(2) .logo {
-    animation: logo-spin infinite 20s linear;
-  }
+.button-container {
+  display: flex;
+  gap: 20px;
 }
 
-.card {
-  padding: 2em;
+.nav-btn {
+  padding: 15px 30px;
+  font-size: 16px;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+  background-color: #4f46e5;
+  color: white;
+  transition: background-color 0.2s ease;
 }
 
-.read-the-docs {
-  color: #888;
+.nav-btn:hover {
+  background-color: #3730a3;
+}
+
+.input-field {
+  padding: 10px 15px;
+  font-size: 16px;
+  border-radius: 6px;
+  border: none;
+  margin-bottom: 20px;
+  width: 250px;
+  text-align: center;
+}
+
+/* --- LOBBY STYLES --- */
+.player-list-box {
+  background: #2a2a3d;
+  padding: 20px;
+  border-radius: 12px;
+  margin-bottom: 20px;
+  width: 300px;
+}
+
+.player-list-box ul {
+  list-style: none;
+  padding: 0;
+}
+
+.me-highlight {
+  color: #4f46e5;
+  font-weight: bold;
+}
+
+.wait-text {
+  font-size: 0.8rem;
+  color: #666;
+  margin: 0;
+  font-style: italic;
+}
+
+/* --- GAME LAYOUT & MAP --- */
+.game-screen {
+  text-align: center;
+  background: #1a1a1a;
+  min-height: 100vh;
+  color: white;
+}
+
+.map-scroll-container {
+  flex: 1;
+  overflow: auto; 
+  background: #333;
+  width: 100%;
+  height: 100%;
+}
+
+.map-img {
+  max-width: none !important; 
+}
+
+.map-node:hover {
+  background-color: white !important;
+  box-shadow: 0 0 10px white;
+}
+
+/* --- UI ELEMENTS --- */
+.game-header-centered {
+  width: 100%;
+  background: #111;
+  padding: 15px 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-bottom: 2px solid #333;
+}
+
+.header-status-box {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.badge {
+  padding: 5px 15px;
+  border-radius: 20px;
+  font-weight: bold;
+  text-transform: uppercase;
+}
+
+.badge.fugitive { background: #e74c3c; color: white; }
+.badge.detective { background: #3498db; color: white; }
+
+.turn-indicator {
+  padding: 10px;
+}
+
+.ticket-bar {
+  flex: 0 0 auto;
+  height: 90px;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  background: #f4f4f4;
+  border-top: 3px solid #333;
+}
+
+.ticket {
+  background: #333;
+  padding: 10px;
+  border-radius: 8px;
+  cursor: pointer;
+  min-width: 80px;
+  transition: transform 0.2s;
+}
+
+.ticket.selected {
+  outline: 3px solid white;
+  transform: translateY(-5px);
+}
+
+.ticket.taxi { background: #f1c40f; color: black; }
+.ticket.bus { background: #3498db; color: white; }
+.ticket.underground { background: #e74c3c; color: white; }
+
+/* --- ANIMATIONS & STATES --- */
+.not-your-turn {
+  opacity: 0.6;
+  pointer-events: none;
+}
+
+.your-turn-pulse {
+  color: #44ff44;
+  animation: fade 1.5s infinite;
+}
+
+@keyframes fade {
+  50% { opacity: 0.3; }
 }
