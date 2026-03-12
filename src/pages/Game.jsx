@@ -168,7 +168,7 @@ function Game() {
                     </div>
                     <div className="ticket">
                       <img src={doubleIcon} alt="Double Move" />
-                    <span>{players[0]?.["x2"] ?? 0}</span>
+                      <span>{player["x2"] ?? 0}</span>
                     </div>
                   </div>
                 </div>

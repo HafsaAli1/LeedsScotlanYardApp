@@ -251,8 +251,8 @@ body {
 .player-box {
   border: 2px solid #4f46e5;
   border-radius: 10px;
-  width: 100%;
-  height: 180px;
+  width: 580px;
+  height: auto;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -320,8 +320,8 @@ body {
 }
 
 .ticket img {
-  width: 60px;
-  height: 50px;
+  width: 100px;
+  height: 60px;
 }
 
 .ticket span {
@@ -345,6 +345,8 @@ body {
     flex-direction: column; 
     align-items: center;
     padding: 10px;
+    gap: 20px;
+    overflow-x: hidden; 
   }
 
   .left-column, 
@@ -356,19 +358,37 @@ body {
   }
 
   .players-panel {
-    width: 100%;      
+    width: 100%; 
+    align-items: center; 
+  }
+
+  .player-box {
+    width: 90% !important; 
+    max-width: 400px;     
+    height: auto;
+    box-sizing: border-box; 
+  }
+
+  .current-player-box {
+    width: 90% !important;
+    max-width: 400px;
+    box-sizing: border-box;
   }
 
   .ticket img {
-    width: 40px;
-    height: 35px;
+    width: 45px; 
+    height: auto;
   }
   
   .ticket-row {
-    gap: 8px;        
+    gap: 10px;
+    flex-wrap: wrap; 
+  }
+
+  .ticket span {
+    font-size: 14px;
   }
 }
-
 
 
 
