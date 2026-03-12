@@ -1,126 +1,21 @@
-const API = "http://trinity-developments.co.uk/api";
-
-console.log("Program started")
-
-export async function getMaps() {
-    
-    const res = await fetch(`${API}/maps`);
-
-    if (!res.ok) {
-        throw new Error("Failed to get maps");
-    }
-
-    return await res.json();
-}
-
-export async function getMap(mapId) {
-    
-    const res = await fetch(`${API}/maps/${mapId}`);
-
-    if (!res.ok) {
-        throw new Error("Failed to get map");
-    }
-
-    return await res.json();
-}
-
-export async function getOpenGames() {
-    
-    const res = await fetch(`${API}/games`);
-
-    if (!res.ok) {
-        throw new Error("Failed to get games");
-    }
-
-    return await res.json();
-}
-
-export async function createGame(mapId) {
-    
-    const res = await fetch(`${API}/games`, {
-        method: "POST",
-        headers: {
-            "Content-Type": "application/json"
-        },
-        body: JSON.stringify({
-            mapId: mapId
-        })
-    });
-
-    if (!res.ok) {
-        throw new Error("Failed to create game");
-    }
-
-    return await res.json();
-}
-
-export async function joinGame(gameId, name) {
-
-    const res = await fetch(`${API}/games/${gameId}/players`, {
-        method: "POST",
-        headers: {
-            "Content-Type": "application/json"
-        },
-        body: JSON.stringify({
-            name: name
-        })
-    });
-
-    if (!res.ok) {
-        throw new Error("Failed to join game");
-    }
-
-    return await res.json();
-}
-
-export async function startGame(gameId, playerId) {
-
-    const res = await fetch(`${API}/games/${gameId}/start/${playerId}`, {
-        method: "PATCH"
-    });
-
-    if (!res.ok) {
-        throw new Error("Failed to start game");
-    }
-
-    return true;
-}
-
-export async function getGame(gameId) {
-
-    const res = await fetch(`${API}/games/${gameId}`);
-
-    if (!res.ok) {
-        throw new Error("Failed to fetch game");
-    }
-
-    return await res.json();
-}
-
-export async function movePlayer(playerId, location) {
-
-    const res = await fetch(`${API}/players/${playerId}/moves`, {
-        method: "POST",
-        headers: {
-            "Content-Type": "application/json"
-        },
-        body: JSON.stringify({
-            location: location
-        })
-    });
-
-    if (!res.ok) {
-        throw new Error("Move failed");
-    }
-
-    return await res.json();
-}
-
+import readline from "readline";
 import fs from "fs/promises";
 import path from "path";
 import { fileURLToPath } from "url";
 
+const API = "http://trinity-developments.co.uk/api";
+
+const TicketNames = {
+    0: "Taxi",
+    1: "Bus",
+    2: "Train"
+};
+
+console.log("Program started");
+
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
+
+// -------------------- Map Loader --------------------
 
 function buildMap(locations, connections) {
 
@@ -128,7 +23,6 @@ function buildMap(locations, connections) {
     const edges = {}
 
     locations.forEach(loc => {
-
         nodes[loc.Number] = {
             id: loc.Number,
             x: loc.xPos,
@@ -140,121 +34,109 @@ function buildMap(locations, connections) {
 
     connections.forEach(conn => {
 
+        if (!edges[conn.A]) edges[conn.A] = []
+        if (!edges[conn.B]) edges[conn.B] = []
+
         edges[conn.A].push({
             to: conn.B,
             ticket: conn.Ticket
         })
+
+        edges[conn.B].push({
+            to: conn.A,
+            ticket: conn.Ticket
+        })
     })
 
-    return {nodes, edges}
+    return { nodes, edges }
 }
 
 export async function loadMapfromSQL() {
-    
+
     const filepath = path.resolve(__dirname, "Team1Map2 1.sql");
     const text = await fs.readFile(filepath, "utf8");
 
-    const locations = []
-    const connections = []
+    const locations = [];
+    const connections = [];
 
-    const locationRegex =
-/INSERT INTO `locations` .* VALUES \('\d+',\s*'(\d+)',\s*'(\d+)',\s*'(\d+)'\);/g
+    let mode = null;
 
-const connectionRegex =
-/INSERT INTO `connections` .* VALUES \('\d+',\s*'(\d+)',\s*'(\d+)',\s*'(\d+)'\);/g
-    
-    let match
+    const lines = text.split("\n");
 
-    while ((match = locationRegex.exec(text)) !== null) {
-        locations.push({
-            Number: Number(match[1]),
-            xPos: Number(match[2]),
-            yPos: Number(match[3])
-        })
+    for (const line of lines) {
+
+        if (line.includes("INSERT INTO `locations`")) {
+            mode = "locations";
+        }
+
+        if (line.includes("INSERT INTO `connections`")) {
+            mode = "connections";
+        }
+
+        const rows = line.match(/\(([^)]+)\)/g);
+
+        if (!rows) continue;
+
+        for (const row of rows) {
+
+            const values = row
+                .replace(/[()']/g, "")
+                .split(",")
+                .map(v => Number(v.trim()));
+
+            if (mode === "locations" && values.length >= 4) {
+
+                locations.push({
+                    Number: values[1],
+                    xPos: values[2],
+                    yPos: values[3]
+                });
+
+            } else if (mode === "connections" && values.length >= 4) {
+
+                connections.push({
+                    A: values[1],
+                    B: values[2],
+                    Ticket: values[3]
+                });
+            }
+        }
     }
 
-    while ((match = connectionRegex.exec(text)) !== null) {
+    console.log("Locations parsed:", locations.length);
+    console.log("Connections parsed:", connections.length);
 
-        connections.push({
-            A: Number(match[1]),
-            B: Number(match[2]),
-            Ticket: Number(match[3])
-        })
-    }
-
-    return buildMap(locations, connections)
+    return buildMap(locations, connections);
 }
 
+// -------------------- Game Class --------------------
+
 export class ScotlandYardGame {
-
     constructor(gameId, playerId) {
+        this.gameId = gameId;
+        this.playerId = playerId;
 
-        this.gameId = gameId
-        this.playerId = playerId
-
-        this.state = null
-        this.map = null
-        this.players = {}
-        this.playerCount = 5
+        this.state = { status: "running", turn: 1, winner: null, players: [] };
+        this.map = null;
+        this.players = {};
+        this.playerCount = 5;
     }
 
     AssignMrX() {
+        const ids = Object.keys(this.players);
+        const mrXId = ids[Math.floor(Math.random() * ids.length)];
+        this.players[mrXId].role = "Mr X";
 
-    const ids = Object.keys(this.players)
-
-    const randomId =
-        ids[Math.floor(Math.random() * ids.length)]
-
-    this.players[randomId].role = "Mr X"
-}
+        // Ensure Mr X starts on a valid node
+        if ((this.map.edges[this.players[mrXId].location] || []).length === 0) {
+            const connectedNodes = Object.keys(this.map.edges).filter(n => this.map.edges[n].length > 0);
+            this.players[mrXId].location = Number(connectedNodes[Math.floor(Math.random() * connectedNodes.length)]);
+        }
+    }
 
     async loadMap() {
-        
-        if (!this.map) {
-            this.map = await loadMapfromSQL()
-        }
-
-        return this.map
-    }
-
-    async init() {
-        
-        console.log("Loading map...")
-
-        this.map = await loadMapfromSQL()
-
-        console.log("Map Loaded")
-        console.log("Node count: ", Object.keys(this.map.nodes).length)
-
-        this.randomisePlayers()
-
-        console.log("Players randomised")
-
-        this.AssignMrX()
-
-        console.log("\nGenerated Players:")
-        console.table(this.players)
-
-        await this.printPlayerInfo()
-    }
-
-    async printPlayerInfo() {
-
-        console.log("\n--- Player Locations ---\n")
-
-        for (const player of Object.values(this.players)) {
-
-            const moves = await this.getValidMovesForLocation(player.location)
-
-            console.log(
-                `Player ${player.id} (${player.role}) is at location ${player.location}`
-            )
-
-            const moveLocations = moves.length ? moves.map(m => m.location).join(", ") : "No moves"
-console.log(`Possible moves: ${moveLocations}`)
-
-            console.log("-----------------------")
-        }
+        if (!this.map) this.map = await loadMapfromSQL();
+        return this.map;
     }
 
     randomisePlayers() {
@@ -264,8 +146,7 @@ console.log(`Possible moves: ${moveLocations}`)
 
     while (Object.keys(this.players).length < this.playerCount) {
 
-        const randomNode =
-            nodeIds[Math.floor(Math.random() * nodeIds.length)]
+        const randomNode = nodeIds[Math.floor(Math.random() * nodeIds.length)]
 
         if (usedNodes.has(randomNode)) continue
 
@@ -281,108 +162,135 @@ console.log(`Possible moves: ${moveLocations}`)
     }
 }
 
-    getPlayers() {
+    async init() {
+        console.log("Loading map...");
+        this.map = await loadMapfromSQL();
+        console.log("Map Loaded. Node count:", Object.keys(this.map.nodes).length);
+        console.log("Total nodes:", Object.keys(this.map.nodes).length)
+console.log("Total edges:", Object.keys(this.map.edges).length)
 
-        if (!this.state) return []
+        this.randomisePlayers();
+        console.log("Players randomised");
 
-        return this.state.players
+        this.AssignMrX();
+        console.log("\nGenerated Players:");
+        console.table(this.players);
+
+        await this.printPlayerInfo();
     }
 
-    getCurrentPlayer() {
-
-        if (!this.state) return null
-
-        return this.state.players[this.state.turn]
-    }
-
-    getPlayer() {
-
-        if (!this.state) return null
-
-        return this.state.players.find(
-            p => p.id === this.playerId
-        )
-    }
-
-    async getValidMoves() {
-
-        await this.loadMap()
-
-        const player = this.getPlayer()
-
-        if (!player) return []
-
-        const location = player.location
-        
-        const moves = this.map.edges[location] || []
-
-        return moves.map(
-            m => ({
-                location: m.to,
-                ticket: m.ticket
-            })
-        )
+    async printPlayerInfo() {
+        console.log("\n--- Player Locations ---\n");
+        for (const player of Object.values(this.players)) {
+            const moves = await this.getValidMovesForLocation(player.location);
+            console.log(`Player ${player.id} (${player.role}) is at location ${player.location}`);
+            const moveLocations = moves.length ? moves.map(m => m.location).join(", ") : "No moves";
+            console.log(`Possible moves: ${moveLocations}`);
+            console.log("-----------------------");
+        }
     }
 
     async getValidMovesForLocation(location) {
+        await this.loadMap();
+        const moves = this.map.edges[location] || [];
+        const unique = new Map()
 
-        await this.loadMap()
-
-        const moves = this.map.edges[location] || []
-
-        return moves.map(
-            m => ({
-                location: m.to,
-                ticket: m.ticket
-            })
-        )
-    }
-
-    async move(destination) {
-
-        await this.loadMap()
-
-        const validMoves = await this.getValidMoves()
-
-        const valid = validMoves.find(
-            m => m.location === destination
-        )
-
-        if (!valid) {
-            throw new Error("Invalid move")
+        for (const m of moves) {
+            const key = `${m.to}-${m.ticket}`
+            unique.set(key, { location: m.to, ticket: m.ticket })
         }
 
-        const result = await movePlayer(
-            this.playerId,
-            destination
-        )
-
-        await this.updateState()
-
-        return result
+        return [...unique.values()]
     }
 
     isGameOver() {
-        if (!this.state) return false
+        return this.state.status === "finished";
+    }
 
-        return this.state.status === "finished"
+    CheckWinCondition() {
+        const mrX = Object.values(this.players).find(p => p.role === "Mr X");
+        const detectives = Object.values(this.players).filter(p => p.role === "Detective");
+
+        for (const d of detectives) {
+            if (d.location === mrX.location) {
+                this.state.status = "finished";
+                this.state.winner = "Detectives";
+            }
+        }
     }
 
     getWinner() {
-
-        if (!this.state) return null
-
-        return this.state.winner
+        return this.state.winner;
     }
 }
 
-async function run() {
+// -------------------- User Input --------------------
 
-    console.log("Creating game instance...")
+function UserInput(query) {
+    const rl = readline.createInterface({ input: process.stdin, output: process.stdout });
+    return new Promise(resolve => {
+        rl.question(query, ans => { rl.close(); resolve(ans); });
+    });
+}
+
+// -------------------- Game Loop --------------------
+
+async function GamePlay(game) {
+    console.log("\n--- Game Started ---\n");
+
+    const playerIds = Object.keys(game.players).map(Number);
+    let turnIndex = 0;
+
+    while (!game.isGameOver()) {
+        const playerId = playerIds[turnIndex];
+        const player = game.players[playerId];
+
+        console.log(`\nPlayer ${player.id} (${player.role})'s turn. Current location: ${player.location}`);
+        const validMoves = await game.getValidMovesForLocation(player.location);
+
+        if (!validMoves.length) {
+            console.log("No valid moves. Skipping turn.");
+        } else if (player.role === "Mr X") {
+            // Mr X moves automatically
+            const randomMove = validMoves[Math.floor(Math.random() * validMoves.length)];
+            player.location = randomMove.location;
+            console.log(`Mr X moves to ${player.location}`);
+            game.CheckWinCondition();
+        } else {
+            // Detective: choose move
+            console.log("Valid moves:");
+            validMoves.forEach((m, i) => console.log(`${i + 1}: Move to ${m.location} using ${TicketNames[m.ticket] ?? `Ticket ${m.ticket}`}`));
+
+            let choice;
+            while (true) {
+                choice = Number(await UserInput(`Choose a move (1-${validMoves.length}): `));
+                if (choice >= 1 && choice <= validMoves.length) break;
+                console.log("Invalid choice, try again.");
+            }
+
+            player.location = validMoves[choice - 1].location;
+            console.log(`Player ${player.id} moved to ${player.location}`);
+            game.CheckWinCondition();
+        }
+
+        turnIndex = (turnIndex + 1) % playerIds.length;
+    }
+
+    console.log("\n--- Game Over ---");
+    console.log("Winner:", game.getWinner());
+}
+
+// -------------------- Run Game --------------------
+
+async function run() {
+    console.log("Creating game instance...");
     const game = new ScotlandYardGame(1, 1);
-    console.log("Running Initialization...")
+
+    console.log("Running Initialization...");
     await game.init();
-    console.log("Initialization complete.")
+
+    console.log("Initialization complete.");
+    await GamePlay(game);
 }
 
 run().catch(err => console.error(err));
