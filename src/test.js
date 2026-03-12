@@ -15,26 +15,33 @@ console.log("Program started");
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
+const USE_API = true; // set to false to force local mode
+
 async function APIRequest(endpoint, method = "GET", body = null) {
+    if (!USE_API) return null; // skip API in local mode
+
     const options = {
         method,
-        headers: {
-            "Content-Type": "application/json"
-        }
+        headers: { "Content-Type": "application/json" },
     };
+    if (body) options.body = JSON.stringify(body);
 
-    if (body) {
-        options.body = JSON.stringify(body);
+    try {
+        const res = await fetch(`${API}/${endpoint}`, options);
+        const text = await res.text();
+        let data;
+        try { data = JSON.parse(text); } catch { data = text; }
+
+        if (!res.ok) {
+            console.warn(`[API] ${method} ${endpoint} failed: ${res.status} ${res.statusText}`);
+            return null; // fallback to local
+        }
+
+        return data;
+    } catch (err) {
+        console.warn(`[API] ${method} ${endpoint} failed: ${err.message}`);
+        return null; // fallback to local
     }
-
-    const res = await fetch(`${API}/${endpoint}`, options);
-
-    if (!res.ok) {
-        throw new Error(`API Error: ${res.status}`);
-    }
-
-    const result = await res.json();
-    return result;
 }
 
 // -------------------- Map Loader --------------------
@@ -144,22 +151,6 @@ export class ScotlandYardGame {
         this.playerCount = 5;
     }
 
-    async updateGameState() {
-        try {
-            const response = await APIRequest("updateGame", "POST", {
-                gameId: this.gameId,
-                players: this.players,
-                turn: this.state.turn,
-                status: this.state.status,
-                winner: this.state.winner
-            });
-
-            console.log("Game state updated:", response);
-        } catch (error) {
-            console.error("Failed to update game state:", err.message);
-        }
-    }
-
     async fetchGameState() {
         try {
             const data = await APIRequest(`getGameState?gameId=${this.gameId}`);
@@ -171,10 +162,16 @@ export class ScotlandYardGame {
     }
     
     async loadPlayersFromAPI() {
+    if (!USE_API) {
+        console.log("API disabled, randomizing players locally");
+        this.randomisePlayers();
+        return;
+    }
+
     try {
         const gameData = await APIRequest(`games/${this.gameId}`);
-        if (!gameData.players || !gameData.players.length) {
-            console.warn("No players returned from API, will randomize locally");
+        if (!gameData?.players?.length) {
+            console.warn("No players returned from API, randomizing locally");
             this.randomisePlayers();
             return;
         }
@@ -189,10 +186,43 @@ export class ScotlandYardGame {
 
         console.log("Players loaded from API");
     } catch (err) {
-        console.error("Failed to fetch players:", err.message);
-        console.log("Randomizing players locally...");
+        console.warn("Failed to fetch players, using local randomization");
         this.randomisePlayers();
     }
+}
+
+async sendMove(player, location, ticket) {
+    if (USE_API) {
+        try {
+            await APIRequest(`players/${player.id}/moves`, "POST", { location, ticket });
+            console.log(`[API] Player ${player.id} moved to ${location} using ${TicketNames[ticket]}`);
+            return;
+        } catch (err) {
+            console.warn("Failed to send move to API, continuing locally");
+        }
+    }
+
+    // local fallback
+    console.log(`[LOCAL] Player ${player.id} moved to ${location} using ${TicketNames[ticket]}`);
+}
+
+async updateGameState() {
+    if (USE_API) {
+        try {
+            await APIRequest("updateGame", "POST", {
+                gameId: this.gameId,
+                players: this.players,
+                turn: this.state.turn,
+                status: this.state.status,
+                winner: this.state.winner
+            });
+            console.log("[API] Game state updated");
+            return;
+        } catch (err) {
+            console.warn("Failed to update game state to API, using local state");
+        }
+    }
+    // local fallback does nothing (state is already local)
 }
 
 
@@ -207,20 +237,6 @@ export class ScotlandYardGame {
             this.players[mrXId].location = Number(connectedNodes[Math.floor(Math.random() * connectedNodes.length)]);
         }
     }
-
-    async sendMove(player, location, ticket) {
-        try {
-            await APIRequest(`players/${player.id}/moves`, "POST", {
-                location,
-                ticket
-            });
-            console.log(`Player ${player.id} moved to ${location} using ${TicketNames[ticket] ?? `Ticket ${ticket}`}`);
-        } catch (err) {
-            console.error("Failed to send move:", err.message);
-        }
-            
-        }
-    
 
     async loadMap() {
         if (!this.map) this.map = await loadMapfromSQL();
@@ -376,30 +392,24 @@ async function GamePlay(game) {
 // -------------------- Run Game --------------------
 
 async function run() {
-    console.log("Creating game on API...");
+    let gameId = 1; // default local game ID
 
-    // 1️⃣ Create the game (empty payload)
-    const newGame = await APIRequest("games", "POST", {});
-    const gameId = newGame.id;
-    console.log("Game created with ID:", gameId);
+    if (USE_API) {
+        console.log("Creating game on API...");
+        const newGame = await APIRequest("games", "POST", {}) || { id: 1 };
+        gameId = newGame.id;
 
-    // 2️⃣ Join all players
-    for (let i = 1; i <= 5; i++) {
-        await APIRequest(`games/${gameId}/players`, "POST", { playerId: i });
-        console.log(`Player ${i} joined the game.`);
+        for (let i = 1; i <= 5; i++) {
+            await APIRequest(`games/${gameId}/players`, "POST", { playerId: i });
+        }
+
+        await APIRequest(`games/${gameId}/start/1`, "PATCH");
+    } else {
+        console.log("Running game locally (no API)");
     }
 
-    // 3️⃣ Start the game
-    await APIRequest(`games/${gameId}/start/1`, "PATCH");
-    console.log("Game started");
-
-    // 4️⃣ Create local game instance
     const game = new ScotlandYardGame(gameId, 1);
-
-    // 5️⃣ Initialize local game (loads map and players from API)
     await game.init();
-
-    // 6️⃣ Run the game loop
     await GamePlay(game);
 }
 
