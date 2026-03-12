@@ -192,3 +192,10 @@ export class ScotlandYardGame {
         return this.state.winner
     }
 }
+
+async function run() {
+    const game = new ScotlandYardGame(1, 1);
+    await game.init();
+}
+
+await run();
