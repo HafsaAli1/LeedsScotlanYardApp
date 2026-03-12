@@ -3,7 +3,7 @@ import fs from "fs/promises";
 import path from "path";
 import { fileURLToPath } from "url";
 
-const API = "http://trinity-developments.co.uk/api";
+const API = "http://trinity-developments.co.uk/";
 
 const TicketNames = {
     0: "Taxi",
@@ -14,6 +14,28 @@ const TicketNames = {
 console.log("Program started");
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
+
+async function APIRequest(endpoint, method = "GET", body = null) {
+    const options = {
+        method,
+        headers: {
+            "Content-Type": "application/json"
+        }
+    };
+
+    if (body) {
+        options.body = JSON.stringify(body);
+    }
+
+    const res = await fetch(`${API}/${endpoint}`, options);
+
+    if (!res.ok) {
+        throw new Error(`API Error: ${res.status}`);
+    }
+
+    const result = await res.json();
+    return result;
+}
 
 // -------------------- Map Loader --------------------
 
@@ -122,6 +144,58 @@ export class ScotlandYardGame {
         this.playerCount = 5;
     }
 
+    async updateGameState() {
+        try {
+            const response = await APIRequest("updateGame", "POST", {
+                gameId: this.gameId,
+                players: this.players,
+                turn: this.state.turn,
+                status: this.state.status,
+                winner: this.state.winner
+            });
+
+            console.log("Game state updated:", response);
+        } catch (error) {
+            console.error("Failed to update game state:", err.message);
+        }
+    }
+
+    async fetchGameState() {
+        try {
+            const data = await APIRequest(`getGameState?gameId=${this.gameId}`);
+            console.log("Received game state:", data);
+            return data;
+        } catch (error) {
+            console.error("Failed to fetch game state:", err.message);
+        }
+    }
+    
+    async loadPlayersFromAPI() {
+    try {
+        const gameData = await APIRequest(`games/${this.gameId}`);
+        if (!gameData.players || !gameData.players.length) {
+            console.warn("No players returned from API, will randomize locally");
+            this.randomisePlayers();
+            return;
+        }
+
+        gameData.players.forEach(p => {
+            this.players[p.id] = {
+                id: p.id,
+                location: p.location,
+                role: p.role ?? "Detective"
+            };
+        });
+
+        console.log("Players loaded from API");
+    } catch (err) {
+        console.error("Failed to fetch players:", err.message);
+        console.log("Randomizing players locally...");
+        this.randomisePlayers();
+    }
+}
+
+
     AssignMrX() {
         const ids = Object.keys(this.players);
         const mrXId = ids[Math.floor(Math.random() * ids.length)];
@@ -134,6 +208,20 @@ export class ScotlandYardGame {
         }
     }
 
+    async sendMove(player, location, ticket) {
+        try {
+            await APIRequest(`players/${player.id}/moves`, "POST", {
+                location,
+                ticket
+            });
+            console.log(`Player ${player.id} moved to ${location} using ${TicketNames[ticket] ?? `Ticket ${ticket}`}`);
+        } catch (err) {
+            console.error("Failed to send move:", err.message);
+        }
+            
+        }
+    
+
     async loadMap() {
         if (!this.map) this.map = await loadMapfromSQL();
         return this.map;
@@ -141,7 +229,9 @@ export class ScotlandYardGame {
 
     randomisePlayers() {
 
-    const nodeIds = Object.keys(this.map.nodes).map(Number)
+    const nodeIds = Object.keys(this.map.edges)
+    .filter(n => this.map.edges[n].length > 0)
+    .map(Number)
     const usedNodes = new Set()
 
     while (Object.keys(this.players).length < this.playerCount) {
@@ -169,7 +259,7 @@ export class ScotlandYardGame {
         console.log("Total nodes:", Object.keys(this.map.nodes).length)
 console.log("Total edges:", Object.keys(this.map.edges).length)
 
-        this.randomisePlayers();
+        await this.loadPlayersFromAPI();
         console.log("Players randomised");
 
         this.AssignMrX();
@@ -271,6 +361,9 @@ async function GamePlay(game) {
             player.location = validMoves[choice - 1].location;
             console.log(`Player ${player.id} moved to ${player.location}`);
             game.CheckWinCondition();
+
+            await game.sendMove(player, player.location, validMoves[choice - 1].ticket);
+            await game.updateGameState();
         }
 
         turnIndex = (turnIndex + 1) % playerIds.length;
@@ -283,13 +376,30 @@ async function GamePlay(game) {
 // -------------------- Run Game --------------------
 
 async function run() {
-    console.log("Creating game instance...");
-    const game = new ScotlandYardGame(1, 1);
+    console.log("Creating game on API...");
 
-    console.log("Running Initialization...");
+    // 1️⃣ Create the game (empty payload)
+    const newGame = await APIRequest("games", "POST", {});
+    const gameId = newGame.id;
+    console.log("Game created with ID:", gameId);
+
+    // 2️⃣ Join all players
+    for (let i = 1; i <= 5; i++) {
+        await APIRequest(`games/${gameId}/players`, "POST", { playerId: i });
+        console.log(`Player ${i} joined the game.`);
+    }
+
+    // 3️⃣ Start the game
+    await APIRequest(`games/${gameId}/start/1`, "PATCH");
+    console.log("Game started");
+
+    // 4️⃣ Create local game instance
+    const game = new ScotlandYardGame(gameId, 1);
+
+    // 5️⃣ Initialize local game (loads map and players from API)
     await game.init();
 
-    console.log("Initialization complete.");
+    // 6️⃣ Run the game loop
     await GamePlay(game);
 }
 
