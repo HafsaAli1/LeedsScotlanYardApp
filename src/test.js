@@ -15,10 +15,10 @@ console.log("Program started");
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
-const USE_API = true; // set to false to force local mode
+const USE_API = true;
 
 async function APIRequest(endpoint, method = "GET", body = null) {
-    if (!USE_API) return null; // skip API in local mode
+    if (!USE_API) return null;
 
     const options = {
         method,
@@ -34,17 +34,15 @@ async function APIRequest(endpoint, method = "GET", body = null) {
 
         if (!res.ok) {
             console.warn(`[API] ${method} ${endpoint} failed: ${res.status} ${res.statusText}`);
-            return null; // fallback to local
+            return null; 
         }
 
         return data;
     } catch (err) {
         console.warn(`[API] ${method} ${endpoint} failed: ${err.message}`);
-        return null; // fallback to local
+        return null; 
     }
 }
-
-// -------------------- Map Loader --------------------
 
 function buildMap(locations, connections) {
 
@@ -138,8 +136,6 @@ export async function loadMapfromSQL() {
     return buildMap(locations, connections);
 }
 
-// -------------------- Game Class --------------------
-
 export class ScotlandYardGame {
     constructor(gameId, playerId) {
         this.gameId = gameId;
@@ -202,7 +198,6 @@ async sendMove(player, location, ticket) {
         }
     }
 
-    // local fallback
     console.log(`[LOCAL] Player ${player.id} moved to ${location} using ${TicketNames[ticket]}`);
 }
 
@@ -222,7 +217,6 @@ async updateGameState() {
             console.warn("Failed to update game state to API, using local state");
         }
     }
-    // local fallback does nothing (state is already local)
 }
 
 
@@ -231,7 +225,6 @@ async updateGameState() {
         const mrXId = ids[Math.floor(Math.random() * ids.length)];
         this.players[mrXId].role = "Mr X";
 
-        // Ensure Mr X starts on a valid node
         if ((this.map.edges[this.players[mrXId].location] || []).length === 0) {
             const connectedNodes = Object.keys(this.map.edges).filter(n => this.map.edges[n].length > 0);
             this.players[mrXId].location = Number(connectedNodes[Math.floor(Math.random() * connectedNodes.length)]);
@@ -330,16 +323,12 @@ console.log("Total edges:", Object.keys(this.map.edges).length)
     }
 }
 
-// -------------------- User Input --------------------
-
 function UserInput(query) {
     const rl = readline.createInterface({ input: process.stdin, output: process.stdout });
     return new Promise(resolve => {
         rl.question(query, ans => { rl.close(); resolve(ans); });
     });
 }
-
-// -------------------- Game Loop --------------------
 
 async function GamePlay(game) {
     console.log("\n--- Game Started ---\n");
@@ -357,13 +346,13 @@ async function GamePlay(game) {
         if (!validMoves.length) {
             console.log("No valid moves. Skipping turn.");
         } else if (player.role === "Mr X") {
-            // Mr X moves automatically
+          
             const randomMove = validMoves[Math.floor(Math.random() * validMoves.length)];
             player.location = randomMove.location;
             console.log(`Mr X moves to ${player.location}`);
             game.CheckWinCondition();
         } else {
-            // Detective: choose move
+        
             console.log("Valid moves:");
             validMoves.forEach((m, i) => console.log(`${i + 1}: Move to ${m.location} using ${TicketNames[m.ticket] ?? `Ticket ${m.ticket}`}`));
 
@@ -389,10 +378,8 @@ async function GamePlay(game) {
     console.log("Winner:", game.getWinner());
 }
 
-// -------------------- Run Game --------------------
-
 async function run() {
-    let gameId = 1; // default local game ID
+    let gameId = 1;
 
     if (USE_API) {
         console.log("Creating game on API...");
