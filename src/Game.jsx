@@ -1,3 +1,4 @@
+// Importing React and necessary tools from other files
 import { useEffect, useState, useCallback } from "react";
 import { getGameState,
          getMaps,
@@ -7,15 +8,18 @@ import { getGameState,
          updateGame
 } from "../services/api";
 
+// Importing components and styles
 import MapView from "./MapView";
 import "../App.css";
 
+// Importing ticket icons
 import taxiIcon from "../assets/tickets/taxi.png";
 import busIcon from "../assets/tickets/bus.png";
 import undergroundIcon from "../assets/tickets/underground.png";
 import mrxIcon from "../assets/tickets/mrx.png";
 import doubleIcon from "../assets/tickets/2x.png";
 
+// Main Game component
 function Game() {
 
   const [loading, setLoading] = useState(true);
@@ -113,6 +117,7 @@ function Game() {
     return ids[nextIndex];
   };
 
+  // Component to handle station clicks on the map
   const handleNodeClick = async (locationId) => {
 
     if (!selectedTicket) {
@@ -146,6 +151,7 @@ function Game() {
         }
       }));
 
+      // Determine next player and update game state
       const nextPlayer = getNextPlayer();
 
       await updateGame({
@@ -166,13 +172,15 @@ function Game() {
     }
   };
 
+  // Show loading state while data is being fetched
   if (loading)
     return (
       <div className="container">
         <h2>Loading...</h2>
       </div>
     );
-
+  
+  // Main game screen rendering
   return (
     <div className="game-screen">
 
@@ -191,6 +199,7 @@ function Game() {
         </div>
       </div>
 
+      // Displaying current phase and player information
       <div className="turn-indicator">
 
         <h3>
@@ -207,6 +216,7 @@ function Game() {
 
       </div>
 
+      // Map view with interactive nodes
       <div className="map-scroll-container">
 
         <MapView
@@ -220,10 +230,10 @@ function Game() {
 
       </div>
 
-      {/* ADVANCED TICKET BAR */}
-
+      // Ticket selection bar for the player
       <div className="ticket-bar-advanced">
 
+        // TicketItem component for taxi tickets
         <TicketItem
           type="taxi"
           icon={taxiIcon}
@@ -232,6 +242,7 @@ function Game() {
           onClick={setSelectedTicket}
         />
 
+        // TicketItem component for bus tickets
         <TicketItem
           type="bus"
           icon={busIcon}
@@ -240,6 +251,7 @@ function Game() {
           onClick={setSelectedTicket}
         />
 
+        // TicketItem component for underground tickets
         <TicketItem
           type="underground"
           icon={undergroundIcon}
@@ -248,6 +260,7 @@ function Game() {
           onClick={setSelectedTicket}
         />
 
+        // TicketItem component for Mr X tickets
         <TicketItem
           type="black"
           icon={mrxIcon}
@@ -256,6 +269,7 @@ function Game() {
           onClick={setSelectedTicket}
         />
 
+        // TicketItem component for double move tickets
         <TicketItem
           type="x2"
           icon={doubleIcon}
@@ -270,8 +284,10 @@ function Game() {
   );
 }
 
+// Component to represent each ticket type in the ticket selection bar
 function TicketItem({ type, icon, count, selected, onClick }) {
 
+  // Determine CSS classes based on selection and availability
   return (
     <div
       className={`ticket-unit ${selected === type ? "active" : ""} ${count === 0 ? "disabled" : ""}`}
