@@ -240,7 +240,7 @@ body {
   text-align: center;
 }
 
-/* --- LOBBY STYLES --- */
+/*  LOBBY STYLES  */
 .player-list-box {
   background: #2a2a3d;
   padding: 20px;
@@ -266,7 +266,7 @@ body {
   font-style: italic;
 }
 
-/* --- GAME LAYOUT & MAP --- */
+/* GAME LAYOUT & MAP  */
 .game-screen {
   text-align: center;
   background: #1a1a1a;
@@ -291,7 +291,7 @@ body {
   box-shadow: 0 0 10px white;
 }
 
-/* --- UI ELEMENTS --- */
+/*  UI ELEMENTS  */
 .game-header-centered {
   width: 100%;
   background: #111;
@@ -350,7 +350,7 @@ body {
 .ticket.bus { background: #3498db; color: white; }
 .ticket.underground { background: #e74c3c; color: white; }
 
-/* --- ANIMATIONS & STATES --- */
+/*  ANIMATIONS & STATES */
 .not-your-turn {
   opacity: 0.6;
   pointer-events: none;
@@ -365,7 +365,7 @@ body {
   50% { opacity: 0.3; }
 }
 
-/* --- FLOATING UI OVERLAYS --- */
+/* FLOATING UI OVERLAYS  */
 
 /* Fixes the header to the top-center without pushing the map down */
 .floating-header {
@@ -377,11 +377,11 @@ body {
   display: flex;
   gap: 20px;
   align-items: center;
-  background: rgba(16, 42, 67, 0.85); /* Dark translucent blue */
+  background: rgba(16, 42, 67, 0.85); 
   padding: 10px 25px;
   border-radius: 18px;
   border: 1px solid rgba(51, 154, 240, 0.4);
-  backdrop-filter: blur(12px); /* Blurs the map behind the panel */
+  backdrop-filter: blur(12px); 
   box-shadow: 0 8px 32px rgba(0, 0, 0, 0.6);
 }
 
@@ -459,25 +459,22 @@ body {
   background: #050a0f;
 }
 
-/* --- TICKET SIZING --- */
+/*  TICKET SIZING  */
 .ticket-unit img {
-  /* Increased from 30px to 60px */
   width: 60px !important; 
   height: auto;
 }
 
 .ticket-count {
-  /* Larger font to match bigger tickets */
   font-size: 1.8rem !important; 
   margin-top: 5px;
 }
 
-/* --- MAP SCROLLING & LAYOUT --- */
 .game-screen {
   position: relative;
   height: 100vh;
   width: 100vw;
-  overflow: hidden; /* Prevents the whole screen from shaking while scrolling the map */
+  overflow: hidden; 
 }
 
 .map-viewport {
@@ -486,39 +483,100 @@ body {
   left: 0;
   width: 100%;
   height: 100%;
-  overflow: auto; /* Enables scrolling/panning */
-  z-index: 1;    /* Sits behind the floating-header (z-index 1000) */
+  overflow: auto; 
+  z-index: 1;   
   cursor: grab;
-  display: block; /* Ensures it behaves as a scrollable block */
-}
+  display: block;
+  padding-top: 70px;
 
 .map-viewport:active {
   cursor: grabbing;
 }
 
-/* Ensure the image inside doesn't restrict itself to the screen height */
-.map-viewport img {
-  max-width: none !important;
-  display: block;
-}
 
-/* Add padding so the map doesn't get cut off by the floating UI at the edges */
 .map-viewport {
   padding-top: 100px; 
   padding-bottom: 150px;
 }
 
+.map-viewport img {
+  max-width: none !important;
+  display: block;
+  margin-top: 20px; 
+}
 
 
 
 
+/* MOBILE-SPECIFIC SCROLLING  */
 
+.map-viewport {
+  padding-bottom: 250px !important; 
+  
+  padding-top: 180px !important; 
+  
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  z-index: 1;
+}
 
+/* Ensure the map image inside stays big enough to trigger the scroll */
+.map-viewport img {
+  max-width: none !important;
+  display: block;
+  /* This margin helps create a buffer at the very edge of the image */
+  margin-bottom: 50px; 
+}
+}
+@media (max-width: 768px) {
+  .map-viewport {
+    padding-bottom: 400px !important; 
+    height: 100vh !important;
+    overflow: auto !important;
+    display: block !important;
+  }
 
+  .map-viewport img {
+    height: auto !important;
+    max-height: none !important;
+    display: block !important;
+    margin-bottom: 90px !important;
 
+  }
+  .map-viewport {
+    zoom: 0.75;
+  }
 
+  .game-hud {
+    width: 100%;
+    left: 0;
+    transform: none;
+    display: flex;
+    justify-content: center;
+    bottom: 10px; 
+  }
 
+  .inventory-bar {
+    width: 95%;
+    max-width: 95vw;
+    padding: 10px 5px !important;
+    box-sizing: border-box; 
+  }
 
+  .ticket-row {
+    gap: 5px !important;
+    justify-content: center;
+  }
 
+  .ticket-unit img {
+    width: 52px !important; 
+  }
 
-
+  .ticket-count {
+    font-size: 1rem !important;
+  }
+}
