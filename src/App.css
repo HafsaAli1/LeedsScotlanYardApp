@@ -179,28 +179,195 @@
 @keyframes fade {
   50% { opacity: 0.3; }
 } */
-/* --- Global Reset & Base Styles --- */
-body, html {
+
+
+
+
+body {
   margin: 0;
-  padding: 0;
-  width: 100%;
-  height: 100%;
-  font-family: 'Inter', sans-serif;
-  background-color: #0a1118; 
+  font-family: Arial, sans-serif;
+  background-color: #1e1e2f;
   color: white;
-  overflow: hidden; 
 }
 
-/* --- Main Game Layout --- */
-.game-screen {
-  position: relative;
-  width: 100vw;
+.container {
   height: 100vh;
   display: flex;
   flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
 }
 
-/* --- Floating Header --- */
+.title {
+  font-size: 3rem;
+  margin-bottom: 10px;
+}
+
+.subtitle {
+  font-size: 1.2rem;
+  color: #ccc;
+  margin-bottom: 40px;
+}
+
+.button-container {
+  display: flex;
+  gap: 20px;
+}
+
+.nav-btn {
+  padding: 15px 30px;
+  font-size: 16px;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+  background-color: #4f46e5;
+  color: white;
+  transition: background-color 0.2s ease;
+}
+
+.nav-btn:hover {
+  background-color: #3730a3;
+}
+
+.input-field {
+  padding: 10px 15px;
+  font-size: 16px;
+  border-radius: 6px;
+  border: none;
+  margin-bottom: 20px;
+  width: 250px;
+  text-align: center;
+}
+
+/* --- LOBBY STYLES --- */
+.player-list-box {
+  background: #2a2a3d;
+  padding: 20px;
+  border-radius: 12px;
+  margin-bottom: 20px;
+  width: 300px;
+}
+
+.player-list-box ul {
+  list-style: none;
+  padding: 0;
+}
+
+.me-highlight {
+  color: #4f46e5;
+  font-weight: bold;
+}
+
+.wait-text {
+  font-size: 0.8rem;
+  color: #666;
+  margin: 0;
+  font-style: italic;
+}
+
+/* --- GAME LAYOUT & MAP --- */
+.game-screen {
+  text-align: center;
+  background: #1a1a1a;
+  min-height: 100vh;
+  color: white;
+}
+
+.map-scroll-container {
+  flex: 1;
+  overflow: auto; 
+  background: #333;
+  width: 100%;
+  height: 100%;
+}
+
+.map-img {
+  max-width: none !important; 
+}
+
+.map-node:hover {
+  background-color: white !important;
+  box-shadow: 0 0 10px white;
+}
+
+/* --- UI ELEMENTS --- */
+.game-header-centered {
+  width: 100%;
+  background: #111;
+  padding: 15px 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-bottom: 2px solid #333;
+}
+
+.header-status-box {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.badge {
+  padding: 5px 15px;
+  border-radius: 20px;
+  font-weight: bold;
+  text-transform: uppercase;
+}
+
+.badge.fugitive { background: #e74c3c; color: white; }
+.badge.detective { background: #3498db; color: white; }
+
+.turn-indicator {
+  padding: 10px;
+}
+
+.ticket-bar {
+  flex: 0 0 auto;
+  height: 90px;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  background: #f4f4f4;
+  border-top: 3px solid #333;
+}
+
+.ticket {
+  background: #333;
+  padding: 10px;
+  border-radius: 8px;
+  cursor: pointer;
+  min-width: 80px;
+  transition: transform 0.2s;
+}
+
+.ticket.selected {
+  outline: 3px solid white;
+  transform: translateY(-5px);
+}
+
+.ticket.taxi { background: #f1c40f; color: black; }
+.ticket.bus { background: #3498db; color: white; }
+.ticket.underground { background: #e74c3c; color: white; }
+
+/* --- ANIMATIONS & STATES --- */
+.not-your-turn {
+  opacity: 0.6;
+  pointer-events: none;
+}
+
+.your-turn-pulse {
+  color: #44ff44;
+  animation: fade 1.5s infinite;
+}
+
+@keyframes fade {
+  50% { opacity: 0.3; }
+}
+
+/* --- FLOATING UI OVERLAYS --- */
+
+/* Fixes the header to the top-center without pushing the map down */
 .floating-header {
   position: absolute;
   top: 20px;
@@ -210,114 +377,15 @@ body, html {
   display: flex;
   gap: 20px;
   align-items: center;
-  background: rgba(16, 42, 67, 0.85); 
+  background: rgba(16, 42, 67, 0.85); /* Dark translucent blue */
   padding: 10px 25px;
-  border-radius: 18px; 
+  border-radius: 18px;
   border: 1px solid rgba(51, 154, 240, 0.4);
-  backdrop-filter: blur(12px);
+  backdrop-filter: blur(12px); /* Blurs the map behind the panel */
   box-shadow: 0 8px 32px rgba(0, 0, 0, 0.6);
 }
 
-.badge {
-  padding: 5px 12px;
-  border-radius: 2px;
-  font-weight: 800;
-  font-size: 0.8rem;
-  text-transform: uppercase;
-}
-.badge.fugitive { background: #ff4757; color: white; }
-.badge.detective { background: #339af0; color: #ffffff; }
-
-/* --- Dr. X Move Log Sidebar (NEW/FIXED) --- */
-.move-log-sidebar {
-  position: absolute;
-  left: 20px;
-  top: 50%;
-  transform: translateY(-50%);
-  z-index: 1001; /* Above map */
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-}
-
-.log-label {
-  font-size: 0.7rem;
-  font-weight: 800;
-  letter-spacing: 2px;
-  color: #ff4757;
-  text-transform: uppercase;
-  margin-left: 10px;
-}
-
-.log-container {
-  background: rgba(16, 42, 67, 0.7);
-  padding: 15px;
-  border-radius: 20px;
-  border: 1px solid rgba(255, 71, 87, 0.3);
-  backdrop-filter: blur(10px);
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-  max-height: 50vh;
-  overflow-y: auto;
-}
-
-.log-entry {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  padding: 6px 12px;
-  background: rgba(255, 255, 255, 0.05);
-  border-radius: 10px;
-  border: 1px solid transparent;
-}
-
-.log-entry.reveal {
-  border-color: #ff4757;
-  background: rgba(255, 71, 87, 0.2);
-}
-
-.log-number {
-  font-weight: 900;
-  opacity: 0.5;
-  font-size: 0.8rem;
-}
-
-.log-icon {
-  width: 24px;
-  height: auto;
-}
-
-.reveal-location {
-  font-weight: 800;
-  color: #ff4757;
-  font-size: 0.9rem;
-}
-
-/* --- Centered Map Viewport --- */
-.map-viewport {
-  flex: 1;
-  width: 100%;
-  height: 100%;
-  overflow: auto; 
-  background: #050a0f;
-  display: flex;
-  justify-content: center;
-  align-items: flex-start; 
-  padding-top: 100px; 
-  padding-bottom: 200px; 
-  box-sizing: border-box;
-}
-
-.map-image {
-  display: block;
-  margin: auto;
-  max-width: none !important; 
-  height: auto;
-  box-shadow: 0 0 50px rgba(0,0,0,0.8);
-}
-
-/* Bottom HUD */
+/* Fixes the HUD to the bottom-center */
 .game-hud {
   position: absolute;
   bottom: 20px; 
@@ -325,8 +393,11 @@ body, html {
   transform: translateX(-50%);
   z-index: 1000;
   width: auto;
+  display: flex;
+  justify-content: center;
 }
 
+/* The inner container for the tickets */
 .inventory-bar {
   background: rgba(20, 50, 80, 0.75); 
   padding: 15px 50px;
@@ -336,11 +407,15 @@ body, html {
   box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
 }
 
+/* Layout for the TicketItem components */
 .ticket-row {
   display: flex;
+  justify-content: center;
+  align-items: flex-end;
   gap: 45px;
 }
 
+/* Styling for individual ticket units */
 .ticket-unit {
   display: flex;
   flex-direction: column;
@@ -350,17 +425,16 @@ body, html {
 }
 
 .ticket-unit img {
-  width: 92px; 
-  height: auto;
-  filter: drop-shadow(0 0 8px rgba(255, 255, 255, 0.25)) drop-shadow(0 5px 10px rgba(0,0,0,0.5));
+  filter: drop-shadow(0 5px 10px rgba(0,0,0,0.5));
+  transition: transform 0.2s ease-out, filter 0.2s ease-out;
 }
 
-.ticket-unit:hover, .ticket-unit.active {
+.ticket-unit:hover {
   transform: translateY(-12px);
 }
 
-.ticket-unit:hover img, .ticket-unit.active img {
-  filter: drop-shadow(0 0 25px #339af0);
+.ticket-unit.active img {
+  filter: drop-shadow(0 0 25px #339af0); /* Blue glow when selected */
 }
 
 .ticket-count {
@@ -370,22 +444,81 @@ body, html {
   color: #ffffff; 
 }
 
-.ticket-count::before {
-  content: "x";
-  font-size: 1.1rem;
-  margin-right: 4px;
-  opacity: 0.8;
+/* Small visual touch for the station and phase text */
+.station-pill, .phase-pill {
+  font-weight: bold;
+  color: #fff;
+  font-size: 0.9rem;
 }
 
-/* Special Ticket Log Variants */
-.log-entry.ticket-black { border: 1px solid #fff; background: rgba(0,0,0,0.5); }
-.log-entry.ticket-x2 { border: 1px solid #f1c40f; }
-
-/* Mobile Fixes */
-@media (max-width: 800px) {
-  .move-log-sidebar { display: none; } /* Hide log on mobile to save space */
-  .floating-header { width: 85%; top: 10px; }
-  .ticket-row { gap: 10px; }
-  .ticket-unit img { width: 48px; }
-  .ticket-count { font-size: 1rem; }
+/* Ensure the map container takes up the full background */
+.map-viewport {
+  width: 100vw;
+  height: 100vh;
+  overflow: auto;
+  background: #050a0f;
 }
+
+/* --- TICKET SIZING --- */
+.ticket-unit img {
+  /* Increased from 30px to 60px */
+  width: 60px !important; 
+  height: auto;
+}
+
+.ticket-count {
+  /* Larger font to match bigger tickets */
+  font-size: 1.8rem !important; 
+  margin-top: 5px;
+}
+
+/* --- MAP SCROLLING & LAYOUT --- */
+.game-screen {
+  position: relative;
+  height: 100vh;
+  width: 100vw;
+  overflow: hidden; /* Prevents the whole screen from shaking while scrolling the map */
+}
+
+.map-viewport {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto; /* Enables scrolling/panning */
+  z-index: 1;    /* Sits behind the floating-header (z-index 1000) */
+  cursor: grab;
+  display: block; /* Ensures it behaves as a scrollable block */
+}
+
+.map-viewport:active {
+  cursor: grabbing;
+}
+
+/* Ensure the image inside doesn't restrict itself to the screen height */
+.map-viewport img {
+  max-width: none !important;
+  display: block;
+}
+
+/* Add padding so the map doesn't get cut off by the floating UI at the edges */
+.map-viewport {
+  padding-top: 100px; 
+  padding-bottom: 150px;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
