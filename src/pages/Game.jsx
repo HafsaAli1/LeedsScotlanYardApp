@@ -384,6 +384,9 @@ function Game() {
   const [gameState, setGameState] = useState(null);
   const [playerInfo, setPlayerInfo] = useState(null);
   const [selectedTicket, setSelectedTicket] = useState(null);
+  const [moveHistory, setMoveHistory] = useState([]);
+
+  const [isLogOpen, setIsLogOpen] = useState(false);
 
   const loadAllData = useCallback(async (isInitial = false) => {
     const gId = sessionStorage.getItem("gameId");
@@ -397,6 +400,20 @@ function Game() {
         getPlayerStatus(pId)
       ]);
 
+      if (game.players) {
+      const historyResults = await Promise.all(
+        game.players.map(async (p) => {
+          const moveRes = await fetch(`http://trinity-developments.co.uk/players/${p.playerId}/moves`);
+          const moveData = await moveRes.json();
+          return {
+            playerName: p.playerName,
+            role: p.role || (p.playerId === game.creatorPlayerId ? 'fugitive' : 'detective'),
+            moves: moveData.moves || [] // The API returns an object with a "moves" array
+          };
+        })
+      );
+      setMoveHistory(historyResults);
+    }
       // 2. Fetch Detailed Data for all players to sync ticket counts
       let me = status;
       if (game.players) {
@@ -447,6 +464,9 @@ function Game() {
       if (isInitial) setLoading(false);
     }
   }, []);
+
+
+
 
   useEffect(() => {
     loadAllData(true);
@@ -537,13 +557,20 @@ function Game() {
   return (
     <div className="game-screen">
       <div className="floating-header">
+        {/* ADDED: Button to open the Travel Log */}
+        <button className="log-toggle-btn" onClick={() => setIsLogOpen(true)}>
+          Travel Log
+        </button>
         <span className={`badge ${playerInfo?.role}`}>
           {playerInfo?.role === "fugitive" ? "Dr. X" : "Detective"}
         </span>
         <span className="station-pill">Station: {playerInfo?.currentLocation}</span>
         <span className="phase-pill">PHASE: {gameState?.state}</span>
       </div>
-
+      {/*Show log only if isLogOpen is true */}
+      {isLogOpen && (
+        <MoveLog history={moveHistory} onClose={() => setIsLogOpen(false)} />
+      )}
       <div className="map-viewport">
         <MapView 
           image={mapImage} 
@@ -582,4 +609,66 @@ function TicketItem({ type, icon, count, selected, onClick }) {
   );
 }
 
+// function MoveLog({ history }) {
+//   const translateTicket = (apiTicket) => {
+//     const ticket = apiTicket?.toLowerCase();
+//     if (ticket === 'green') return 'BUS';
+//     if (ticket === 'yellow') return 'TAXI';
+//     if (ticket === 'red') return 'UNDERGROUND';
+//     return apiTicket?.toUpperCase();
+//   };
+
+function MoveLog({ history, onClose }) {
+  const translateTicket = (apiTicket) => {
+    const ticket = apiTicket?.toLowerCase();
+    if (ticket === 'green') return 'BUS';
+    if (ticket === 'yellow') return 'TAXI';
+    if (ticket === 'red') return 'UNDERGROUND';
+    return apiTicket?.toUpperCase();
+  };
+
+  return (
+    <div className="move-log-overlay">
+      <div className="log-header-container">
+        <h3 className="log-title">Travel Log</h3>
+        <button className="log-close-btn" onClick={onClose}>×</button>
+      </div>
+      <div className="log-content">
+        {history.map((player, pIdx) => {
+          const isFugitive = player.role === 'fugitive';
+          
+          return (
+            <div key={pIdx} className="log-player-block">
+              <div className="log-player-header">
+                <span className={`log-role-dot ${player.role}`}></span>
+                <strong>{player.playerName}</strong>
+              </div>
+              <div className="log-move-list">
+                {player.moves.map((m, mIdx) => {
+                  const roundNumber = mIdx + 1;
+                  
+                  // If it's Dr. X, only show the location at specific rounds.
+                  // Otherwise, show "???"
+                  const shouldShowLocation = !isFugitive || (roundNumber % 3 === 0);
+
+                  return (
+                    <div key={mIdx} className="log-entry">
+                      <span className="log-round">{roundNumber}</span>
+                      <span className={`log-ticket-type ${m.ticket?.toLowerCase()}`}>
+                        {translateTicket(m.ticket)}
+                      </span>
+                      <span className="log-station">
+                        {shouldShowLocation ? m.destination : "???"}
+                      </span>
+                    </div>
+                  );
+                })}
+              </div>
+            </div>
+          );
+        })}
+      </div>
+    </div>
+  );
+}
 export default Game;

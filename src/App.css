@@ -532,6 +532,94 @@ body {
   margin-bottom: 50px; 
 }
 }
+
+/* Style for the button inside the floating header */
+.log-toggle-btn {
+  background: rgba(5, 31, 54, 0.85);
+  color: white;
+  border: 2px solid rgba(30, 87, 141, 0.85);;
+  padding: 5px 12px;
+  border-radius: 12px;
+  cursor: pointer;
+  margin-right: 10px;
+  font-weight: bold;
+}
+
+/* Container for Log Title and X button */
+.log-header-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+/* The X button */
+.log-close-btn {
+  background: none;
+  border: none;
+  color: #ff4d4d;
+  font-size: 24px;
+  font-weight: bold;
+  cursor: pointer;
+  line-height: 1;
+}
+
+.move-log-overlay {
+  position: absolute;
+  top: 100px; 
+  left: 20px;
+  width: 220px;
+  max-height: 60vh;
+  background: rgba(16, 42, 67, 0.85);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(51, 154, 240, 0.4);
+  border-radius: 18px;
+  padding: 15px;
+  z-index: 1000;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.6);
+}
+
+.log-content {
+  overflow-y: auto;
+  margin-top: 10px;
+}
+
+.log-player-block {
+  margin-bottom: 15px;
+}
+
+.log-entry {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.85rem;
+  margin-bottom: 4px;
+  background: rgba(255, 255, 255, 0.05);
+  padding: 4px 8px;
+  border-radius: 6px;
+}
+
+.log-round { color: #888; font-weight: bold; width: 15px; }
+
+/* Colors matching the API ticket names */
+.log-ticket-type.yellow { color: #f1c40f; }
+.log-ticket-type.green { 
+  color: #9b59b6; /* Purple color */
+  font-weight: bold;
+}.log-ticket-type.red { color: #e74c3c; }
+.log-ticket-type.black { color: #fff; text-decoration: underline; }
+
+.log-role-dot { width: 8px; height: 8px; border-radius: 50%; display: inline-block; margin-right: 8px; }
+.log-role-dot.fugitive { background: #e74c3c; }
+.log-role-dot.detective { background: #3498db; }
+
+
+
+
+
 @media (max-width: 768px) {
   .map-viewport {
     padding-bottom: 400px !important; 
