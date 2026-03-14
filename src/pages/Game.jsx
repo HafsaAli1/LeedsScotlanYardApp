@@ -176,9 +176,40 @@ function Game() {
 
 
   if (loading) return <div className="container"><h2>Loading Map...</h2></div>;
-
+  if (gameState?.state === "over") console.log("The Winner is:", gameState.winner);
   return (
     <div className="game-screen">
+      {/* WINNER REVEAL OVERLAY */}
+      {gameState?.state?.toLowerCase() === "over" && (
+        <div className="winner-overlay">
+          <div className="winner-content">
+            <h1 className="game-over-title">GAME OVER</h1>
+            
+            {/* Logic: If winner is 'detective' OR 'student' OR 'detectives', they win.
+              We use .includes to be safe against different API naming conventions.
+            */}
+            {["detective", "student", "detectives"].includes(gameState.winner?.toLowerCase()) ? (
+              <>
+                <h2 className="victory-text">✨ SUCCESS! ✨</h2>
+                <p className="victory-sub">You caught Dr. X! The assessment feedback is safe.</p>
+              </>
+            ) : (
+              <>
+                <h2 className="defeat-text"> DR. X ESCAPED </h2>
+                <p className="defeat-sub">You failed to catch Dr. X and he has fled with you assessment feedback! </p>
+              </>
+            )}
+
+            <div className="final-stats">
+              <p>Total Rounds: {gameState.round}</p>
+            </div>
+
+            <button className="reset-btn" onClick={() => window.location.href = '/'}>
+              Main Menu
+            </button>
+          </div>
+        </div>
+      )}
       <div className="floating-header">
         {/* ADDED: Button to open the Travel Log */}
         <button className="log-toggle-btn" onClick={() => setIsLogOpen(true)}>

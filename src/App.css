@@ -621,7 +621,76 @@ body {
 .log-role-dot.detective { background: #3498db; }
 
 
+/* --- WINNER REVEAL OVERLAY (Purple Theme) --- */
+.winner-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(10, 10, 20, 0.95); /* Slightly darker for more drama */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999; 
+  backdrop-filter: blur(10px);
+}
 
+.winner-content {
+  background: #2a2a3d; /* Matches your player-list-box background */
+  padding: 50px;
+  border-radius: 20px;
+  text-align: center;
+  border: 3px solid #4f46e5; /* Consistent Purple */
+  box-shadow: 0 0 40px rgba(79, 70, 229, 0.4);
+  max-width: 400px;
+  width: 90%;
+}
+
+.game-over-title {
+  font-size: 2.5rem;
+  margin-bottom: 10px;
+  letter-spacing: 2px;
+}
+
+.victory-text { 
+  color: #a5b4fc; /* Light purple-tinted white */
+  font-size: 2rem;
+  text-shadow: 0 0 15px rgba(79, 70, 229, 0.8); 
+}
+
+.defeat-text { 
+  color: #ff6b6b; /* Soft red for Dr. X escaping */
+  font-size: 2rem;
+  text-shadow: 0 0 15px rgba(255, 107, 107, 0.5); 
+}
+
+.victory-sub, .defeat-sub {
+  color: #ccc;
+  margin: 20px 0;
+  line-height: 1.5;
+}
+
+/* Reset button now matches your .nav-btn style perfectly */
+.reset-btn {
+  margin-top: 20px;
+  padding: 15px 35px;
+  background-color: #4f46e5;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+}
+
+.reset-btn:hover {
+  background-color: #3730a3;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(79, 70, 229, 0.4);
+}
 
 
 @media (max-width: 768px) {
