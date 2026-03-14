@@ -577,7 +577,7 @@ function TicketItem({ type, icon, count, selected, onClick }) {
       onClick={() => count > 0 && onClick(type)}
     >
       <img src={icon} alt={type} style={{ width: '30px', height: 'auto' }} />
-      <span className="ticket-count">{count ?? 0}</span>
+      <span className="ticket-count">x{count ?? 0}</span>
     </div>
   );
 }
