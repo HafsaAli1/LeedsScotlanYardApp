@@ -5,6 +5,7 @@ import JoinGame from "./pages/JoinGame";
 import Lobby from "./pages/Lobby";
 import Game from "./pages/Game";
 import MapView from "./pages/MapView";
+import Instructions from "./pages/Instructions";
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
         <Route path="/lobby" element={<Lobby />} />
         <Route path="/game" element={<Game />} />
         <Route path="/map" element={<MapView />} />
+        <Route path="/instructions" element={<Instructions />} />
       </Routes>
     </BrowserRouter>
   );

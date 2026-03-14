@@ -17,6 +17,9 @@ function Home() {
         <button className="nav-btn" onClick={() => navigate("/join")}>
           Join Game
         </button>
+        <button className="nav-btn" onClick={() => navigate("/instructions")}>
+          Instructions
+        </button>
       </div>
     </div>
   );
