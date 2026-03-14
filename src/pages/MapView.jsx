@@ -63,7 +63,7 @@ const MapView = ({ image, nodes, onNodeClick, activeTicket, playerLocation, allP
         });
 
         // dot colouring
-        let bgColor = 'rgba(255, 255, 255, 0.3)'; 
+        let bgColor = 'rgba(255, 255, 255, 0)'; 
         
         if (isMeHere) {
           bgColor = getPlayerColor(me); // Use your color
@@ -71,7 +71,7 @@ const MapView = ({ image, nodes, onNodeClick, activeTicket, playerLocation, allP
           bgColor = getPlayerColor(otherPlayer); // Use their assigned color 
         } else if (activeTicket) {
           // If you have clicked a ticket, highlight nearby stations in Yellow to show where you can move
-          bgColor = 'rgba(255, 255, 0, 0.6)'; 
+          bgColor = 'rgba(212, 214, 84, 0.26)'; 
         }
 
         const isOccupied = isMeHere || otherPlayer;
@@ -88,11 +88,11 @@ const MapView = ({ image, nodes, onNodeClick, activeTicket, playerLocation, allP
               left: `${node.xPos}px`,
               top: `${node.yPos}px`,
               transform: 'translate(-50%, -50%)', // Center the circle on the coordinate
-              width: isOccupied ? '28px' : '18px', // Make dots bigger if a player is there
-              height: isOccupied ? '28px' : '18px',
-              borderRadius: '50%',
+              width: isOccupied ? '30px' : '45px', // Make dots bigger if a player is there
+              height: isOccupied ? '45px' : '30px',
+              borderRadius: '34%',
               backgroundColor: bgColor,
-              border: isOccupied ? '3px solid white' : '1px solid #000',
+              border: isOccupied ? '3px solid white' : '1px solid #00000017',
               // Add a glow effect if a player is standing there
               boxShadow: isOccupied ? `0 0 12px ${bgColor}` : 'none',
               cursor: 'pointer',
