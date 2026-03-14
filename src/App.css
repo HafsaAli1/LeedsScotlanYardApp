@@ -671,6 +671,16 @@ body {
   .ticket-count {
     font-size: 1rem !important;
   }
+  .floating-header {
+    font-size: 0.8rem;
+    padding: 6px;
+    gap: 4px;
+    border-radius: 15px; 
+  }
+  
+  .badge, .station-pill, .phase-pill, .round-pill, .log-toggle-btn {
+    padding: 4px 8px; 
+  }
 }
 
 
