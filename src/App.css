@@ -287,7 +287,7 @@ body {
 }
 
 .map-node:hover {
-  background-color: white !important;
+  background-color: rgba(255, 255, 255, 0.425) !important;
   box-shadow: 0 0 10px white;
 }
 
@@ -434,7 +434,12 @@ body {
 }
 
 .ticket-unit.active img {
-  filter: drop-shadow(0 0 5px #16e5ec); /* Blue glow when selected */
+  filter: drop-shadow(0 0 21px #0d3ddb); /* Blue glow when selected */
+  filter: 
+    drop-shadow(0 0 5px #e1e9bd) 
+    drop-shadow(0 0 15px rgba(22, 229, 236, 0.6));
+  
+  animation: ticket-pulse 2s infinite ease-in-out;
 }
 
 .ticket-count {
