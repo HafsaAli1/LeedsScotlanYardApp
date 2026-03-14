@@ -445,7 +445,7 @@ body {
 }
 
 /* Small visual touch for the station and phase text */
-.station-pill, .phase-pill {
+.station-pill, .phase-pill, .round-pill {
   font-weight: bold;
   color: #fff;
   font-size: 0.9rem;
@@ -528,7 +528,6 @@ body {
 .map-viewport img {
   max-width: none !important;
   display: block;
-  /* This margin helps create a buffer at the very edge of the image */
   margin-bottom: 50px; 
 }
 }
@@ -607,7 +606,7 @@ body {
 /* Colors matching the API ticket names */
 .log-ticket-type.yellow { color: #f1c40f; }
 .log-ticket-type.green { 
-  color: #9b59b6; /* Purple color */
+  color: #9b59b6; 
   font-weight: bold;
 }.log-ticket-type.red { color: #e74c3c; }
 .log-ticket-type.black { color: #fff; text-decoration: underline; }

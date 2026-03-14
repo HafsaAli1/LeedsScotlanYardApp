@@ -566,6 +566,12 @@ function Game() {
         </span>
         <span className="station-pill">Station: {playerInfo?.currentLocation}</span>
         <span className="phase-pill">PHASE: {gameState?.state}</span>
+        {/* Round Pill - Pulled from gameState (round and length) */}
+        {gameState && (
+          <span className="round-pill">
+            Round: {gameState.round} / {gameState.length}
+          </span>
+        )}
       </div>
       {/*Show log only if isLogOpen is true */}
       {isLogOpen && (
