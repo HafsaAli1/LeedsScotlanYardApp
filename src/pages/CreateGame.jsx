@@ -116,7 +116,7 @@ function CreateGame() {
           className="nav-btn start-btn" 
           disabled={loading || !selectedMap}
         >
-          {loading ? "Initializing..." : "Create Game"}
+          {loading ? "Initialising..." : "Create Game"}
         </button>
       </div>
     </div>

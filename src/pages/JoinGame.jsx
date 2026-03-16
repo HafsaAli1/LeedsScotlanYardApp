@@ -40,7 +40,7 @@ function JoinGame() {
       sessionStorage.setItem("gameId", gameId);
       sessionStorage.setItem("playerName", playerName);
 
-      // --- THE CRITICAL FIX ---
+
       // Capture the detective's starting location immediately
       if (response.location) {
         console.log("Join captured starting location:", response.location);
