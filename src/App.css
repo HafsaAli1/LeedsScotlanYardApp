@@ -1,3 +1,188 @@
+/* body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background-color: #1e1e2f;
+  color: white;
+}
+
+.container {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+.title {
+  font-size: 3rem;
+  margin-bottom: 10px;
+}
+
+.subtitle {
+  font-size: 1.2rem;
+  color: #ccc;
+  margin-bottom: 40px;
+}
+
+.button-container {
+  display: flex;
+  gap: 20px;
+}
+
+.nav-btn {
+  padding: 15px 30px;
+  font-size: 16px;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+  background-color: #4f46e5;
+  color: white;
+  transition: background-color 0.2s ease;
+}
+
+.nav-btn:hover {
+  background-color: #3730a3;
+}
+
+.input-field {
+  padding: 10px 15px;
+  font-size: 16px;
+  border-radius: 6px;
+  border: none;
+  margin-bottom: 20px;
+  width: 250px;
+  text-align: center;
+} */
+
+/* --- LOBBY STYLES --- */
+/* .player-list-box {
+  background: #2a2a3d;
+  padding: 20px;
+  border-radius: 12px;
+  margin-bottom: 20px;
+  width: 300px;
+}
+
+.player-list-box ul {
+  list-style: none;
+  padding: 0;
+}
+
+.me-highlight {
+  color: #4f46e5;
+  font-weight: bold;
+}
+
+.wait-text {
+  font-size: 0.8rem;
+  color: #666;
+  margin: 0;
+  font-style: italic;
+} */
+
+/* --- GAME LAYOUT & MAP --- */
+/* .game-screen {
+  text-align: center;
+  background: #1a1a1a;
+  min-height: 100vh;
+  color: white;
+}
+
+.map-scroll-container {
+  flex: 1;
+  overflow: auto; 
+  background: #333;
+  width: 100%;
+  height: 100%;
+}
+
+.map-img {
+  max-width: none !important; 
+}
+
+.map-node:hover {
+  background-color: white !important;
+  box-shadow: 0 0 10px white;
+} */
+
+/* --- UI ELEMENTS --- */
+/* .game-header-centered {
+  width: 100%;
+  background: #111;
+  padding: 15px 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-bottom: 2px solid #333;
+}
+
+.header-status-box {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.badge {
+  padding: 5px 15px;
+  border-radius: 20px;
+  font-weight: bold;
+  text-transform: uppercase;
+}
+
+.badge.fugitive { background: #e74c3c; color: white; }
+.badge.detective { background: #3498db; color: white; }
+
+.turn-indicator {
+  padding: 10px;
+}
+
+.ticket-bar {
+  flex: 0 0 auto;
+  height: 90px;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  background: #f4f4f4;
+  border-top: 3px solid #333;
+}
+
+.ticket {
+  background: #333;
+  padding: 10px;
+  border-radius: 8px;
+  cursor: pointer;
+  min-width: 80px;
+  transition: transform 0.2s;
+}
+
+.ticket.selected {
+  outline: 3px solid white;
+  transform: translateY(-5px);
+}
+
+.ticket.taxi { background: #f1c40f; color: black; }
+.ticket.bus { background: #3498db; color: white; }
+.ticket.underground { background: #e74c3c; color: white; } */
+
+/* --- ANIMATIONS & STATES --- */
+/* .not-your-turn {
+  opacity: 0.6;
+  pointer-events: none;
+}
+
+.your-turn-pulse {
+  color: #44ff44;
+  animation: fade 1.5s infinite;
+}
+
+@keyframes fade {
+  50% { opacity: 0.3; }
+} */
+
+
+
+
 body {
   margin: 0;
   font-family: Arial, sans-serif;
@@ -55,7 +240,7 @@ body {
   text-align: center;
 }
 
-/* --- LOBBY STYLES --- */
+/*  LOBBY STYLES  */
 .player-list-box {
   background: #2a2a3d;
   padding: 20px;
@@ -81,7 +266,7 @@ body {
   font-style: italic;
 }
 
-/* --- GAME LAYOUT & MAP --- */
+/* GAME LAYOUT & MAP  */
 .game-screen {
   text-align: center;
   background: #1a1a1a;
@@ -102,11 +287,11 @@ body {
 }
 
 .map-node:hover {
-  background-color: white !important;
+  background-color: rgba(255, 255, 255, 0.425) !important;
   box-shadow: 0 0 10px white;
 }
 
-/* --- UI ELEMENTS --- */
+/*  UI ELEMENTS  */
 .game-header-centered {
   width: 100%;
   background: #111;
@@ -165,7 +350,7 @@ body {
 .ticket.bus { background: #3498db; color: white; }
 .ticket.underground { background: #e74c3c; color: white; }
 
-/* --- ANIMATIONS & STATES --- */
+/*  ANIMATIONS & STATES */
 .not-your-turn {
   opacity: 0.6;
   pointer-events: none;
@@ -179,3 +364,414 @@ body {
 @keyframes fade {
   50% { opacity: 0.3; }
 }
+
+/* FLOATING UI OVERLAYS  */
+
+/* Fixes the header to the top-center without pushing the map down */
+.floating-header {
+  position: absolute;
+  top: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 1000;
+  display: flex;
+  gap: 20px;
+  align-items: center;
+  background: rgba(16, 42, 67, 0.85); 
+  padding: 10px 25px;
+  border-radius: 18px;
+  border: 1px solid rgba(51, 154, 240, 0.4);
+  backdrop-filter: blur(12px); 
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.6);
+}
+
+/* Fixes the HUD to the bottom-center */
+.game-hud {
+  position: absolute;
+  bottom: 20px; 
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 1000;
+  width: auto;
+  display: flex;
+  justify-content: center;
+}
+
+/* The inner container for the tickets */
+.inventory-bar {
+  background: rgba(20, 50, 80, 0.75); 
+  padding: 15px 50px;
+  border-radius: 28px; 
+  border: 1px solid rgba(51, 154, 240, 0.4);
+  backdrop-filter: blur(10px);
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+}
+
+/* Layout for the TicketItem components */
+.ticket-row {
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  gap: 45px;
+}
+
+/* Styling for individual ticket units */
+.ticket-unit {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  cursor: pointer;
+  transition: all 0.2s ease-out;
+}
+
+.ticket-unit img {
+  filter: drop-shadow(0 5px 10px rgba(0,0,0,0.5));
+  transition: transform 0.2s ease-out, filter 0.2s ease-out;
+}
+
+.ticket-unit:hover {
+  transform: translateY(-12px);
+}
+
+.ticket-unit.active img {
+  filter: drop-shadow(0 0 21px #0d3ddb); /* Blue glow when selected */
+  filter: 
+    drop-shadow(0 0 5px #e1e9bd) 
+    drop-shadow(0 0 15px rgba(22, 229, 236, 0.6));
+  
+  animation: ticket-pulse 2s infinite ease-in-out;
+}
+
+.ticket-count {
+  margin-top: 10px;
+  font-size: 1.5rem;
+  font-weight: 900;
+  color: #ffffff; 
+}
+
+/* Small visual touch for the station and phase text */
+.station-pill, .phase-pill, .round-pill {
+  font-weight: bold;
+  color: #fff;
+  font-size: 0.9rem;
+}
+
+/* Ensure the map container takes up the full background */
+.map-viewport {
+  width: 100vw;
+  height: 100vh;
+  overflow: auto;
+  background: #050a0f;
+}
+
+/*  TICKET SIZING  */
+.ticket-unit img {
+  width: 60px !important; 
+  height: auto;
+}
+
+.ticket-count {
+  font-size: 1.5rem !important; 
+  margin-top: 5px;
+}
+
+.game-screen {
+  position: relative;
+  height: 100vh;
+  width: 100vw;
+  overflow: hidden; 
+}
+
+.map-viewport {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto; 
+  z-index: 1;   
+  cursor: grab;
+  display: block;
+  padding-top: 70px;
+
+.map-viewport:active {
+  cursor: grabbing;
+}
+
+
+.map-viewport {
+  padding-top: 100px; 
+  padding-bottom: 150px;
+}
+
+.map-viewport img {
+  max-width: none !important;
+  display: block;
+  margin-top: 20px; 
+}
+
+
+
+
+/* MOBILE-SPECIFIC SCROLLING  */
+
+.map-viewport {
+  padding-bottom: 250px !important; 
+  
+  padding-top: 180px !important; 
+  
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  z-index: 1;
+}
+
+/* Ensure the map image inside stays big enough to trigger the scroll */
+.map-viewport img {
+  max-width: none !important;
+  display: block;
+  margin-bottom: 50px; 
+}
+}
+
+/* Style for the button inside the floating header */
+.log-toggle-btn {
+  background: rgba(5, 31, 54, 0.85);
+  color: white;
+  border: 2px solid rgba(30, 87, 141, 0.85);;
+  padding: 5px 12px;
+  border-radius: 12px;
+  cursor: pointer;
+  margin-right: 10px;
+  font-weight: bold;
+}
+
+/* Container for Log Title and X button */
+.log-header-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+/* The X button */
+.log-close-btn {
+  background: none;
+  border: none;
+  color: #ff4d4d;
+  font-size: 24px;
+  font-weight: bold;
+  cursor: pointer;
+  line-height: 1;
+}
+
+.move-log-overlay {
+  position: absolute;
+  top: 100px; 
+  left: 20px;
+  width: 220px;
+  max-height: 60vh;
+  background: rgba(16, 42, 67, 0.85);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(51, 154, 240, 0.4);
+  border-radius: 18px;
+  padding: 15px;
+  z-index: 1000;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.6);
+}
+
+.log-content {
+  overflow-y: auto;
+  margin-top: 10px;
+}
+
+.log-player-block {
+  margin-bottom: 15px;
+}
+
+.log-entry {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.85rem;
+  margin-bottom: 4px;
+  background: rgba(255, 255, 255, 0.05);
+  padding: 4px 8px;
+  border-radius: 6px;
+}
+
+.log-round { color: #888; font-weight: bold; width: 15px; }
+
+/* Colors matching the API ticket names */
+.log-ticket-type.yellow { color: #f1c40f; }
+.log-ticket-type.green { 
+  color: #9b59b6; 
+  font-weight: bold;
+}.log-ticket-type.red { color: #e74c3c; }
+.log-ticket-type.black { color: #fff; text-decoration: underline; }
+
+.log-role-dot { width: 8px; height: 8px; border-radius: 50%; display: inline-block; margin-right: 8px; }
+.log-role-dot.fugitive { background: #e74c3c; }
+.log-role-dot.detective { background: #3498db; }
+
+
+/* --- WINNER REVEAL OVERLAY (Purple Theme) --- */
+.winner-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(10, 10, 20, 0.95); /* Slightly darker for more drama */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999; 
+  backdrop-filter: blur(10px);
+}
+
+.winner-content {
+  background: #2a2a3d; /* Matches your player-list-box background */
+  padding: 50px;
+  border-radius: 20px;
+  text-align: center;
+  border: 3px solid #4f46e5; /* Consistent Purple */
+  box-shadow: 0 0 40px rgba(79, 70, 229, 0.4);
+  max-width: 400px;
+  width: 90%;
+}
+
+.game-over-title {
+  font-size: 2.5rem;
+  margin-bottom: 10px;
+  letter-spacing: 2px;
+}
+
+.victory-text { 
+  color: #a5b4fc; /* Light purple-tinted white */
+  font-size: 2rem;
+  text-shadow: 0 0 15px rgba(79, 70, 229, 0.8); 
+}
+
+.defeat-text { 
+  color: #ff6b6b; /* Soft red for Dr. X escaping */
+  font-size: 2rem;
+  text-shadow: 0 0 15px rgba(255, 107, 107, 0.5); 
+}
+
+.victory-sub, .defeat-sub {
+  color: #ccc;
+  margin: 20px 0;
+  line-height: 1.5;
+}
+
+/* Reset button now matches your .nav-btn style perfectly */
+.reset-btn {
+  margin-top: 20px;
+  padding: 15px 35px;
+  background-color: #4f46e5;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+}
+
+.reset-btn:hover {
+  background-color: #3730a3;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(79, 70, 229, 0.4);
+}
+
+
+@media (max-width: 768px) {
+  .map-viewport {
+    padding-bottom: 400px !important; 
+    height: 100vh !important;
+    overflow: auto !important;
+    display: block !important;
+  }
+
+  .map-viewport img {
+    height: auto !important;
+    max-height: none !important;
+    display: block !important;
+    margin-bottom: 90px !important;
+
+  }
+  .map-viewport {
+    zoom: 0.75;
+  }
+
+  .game-hud {
+    width: 100%;
+    left: 0;
+    transform: none;
+    display: flex;
+    justify-content: center;
+    bottom: 10px; 
+  }
+
+  .inventory-bar {
+    width: 95%;
+    max-width: 95vw;
+    padding: 10px 5px !important;
+    box-sizing: border-box; 
+  }
+
+  .ticket-row {
+    gap: 5px !important;
+    justify-content: center;
+  }
+
+  .ticket-unit img {
+    width: 52px !important; 
+  }
+
+  .ticket-count {
+    font-size: 1rem !important;
+  }
+  .floating-header {
+    font-size: 0.8rem;
+    padding: 6px;
+    gap: 4px;
+    border-radius: 15px; 
+  }
+  
+  .badge, .station-pill, .phase-pill, .round-pill, .log-toggle-btn {
+    padding: 4px 8px; 
+  }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
